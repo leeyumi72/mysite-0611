@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Hub — AI 서비스 모음</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg-nav:    rgba(13,17,23,0.92);
+      --bg-side:   #0d1117;
+      --bg-card:   #161b22;
+      --border:    #21262d;
+      --primary:   #7c6af8;
+      --primary-h: #6254d4;
+      --accent:    #a5b4fc;
+      --text:      #e6edf3;
+      --muted:     #7d8590;
+      --glow:      rgba(124,106,248,0.18);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 58px;
+      background: var(--bg-nav);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 24px;
+      z-index: 200; gap: 32px;
+    }
+    .logo {
+      font-size: 1.15rem; font-weight: 800; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #a5b4fc, #7c6af8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .logo span { font-size: 1.1rem; }
+
+    .nav-list { display: flex; gap: 4px; list-style: none; }
+    .nav-item {
+      padding: 7px 14px; border-radius: 8px;
+      cursor: pointer; color: var(--muted);
+      font-size: 0.85rem; font-weight: 500;
+      transition: all 0.18s; white-space: nowrap;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .nav-item:hover { background: rgba(124,106,248,0.1); color: var(--text); }
+    .nav-item.active {
+      background: var(--primary); color: #fff;
+      box-shadow: 0 0 14px rgba(124,106,248,0.4);
+    }
+    .nav-item .emoji { font-size: 1rem; }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: flex;
+      margin-top: 58px;
+      min-height: calc(100vh - 58px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 210px; flex-shrink: 0;
+      background: var(--bg-side);
+      border-right: 1px solid var(--border);
+      padding: 20px 10px;
+      position: sticky; top: 58px;
+      height: calc(100vh - 58px);
+      overflow-y: auto;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .sidebar-label {
+      font-size: 0.68rem; font-weight: 600;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 1.2px; padding: 0 10px; margin-bottom: 6px;
+    }
+    .sidebar-item {
+      padding: 9px 12px; border-radius: 8px;
+      cursor: pointer; color: var(--muted);
+      font-size: 0.84rem; transition: all 0.16s;
+      margin-bottom: 2px; line-height: 1.3;
+    }
+    .sidebar-item:hover { background: rgba(124,106,248,0.08); color: var(--text); }
+    .sidebar-item.active {
+      background: rgba(124,106,248,0.15);
+      color: var(--accent); font-weight: 600;
+      border-left: 3px solid var(--primary);
+    }
+
+    /* ── MAIN ── */
+    .main { flex: 1; padding: 28px 32px; overflow-y: auto; }
+
+    .section-head { margin-bottom: 24px; }
+    .section-head h2 { font-size: 1.45rem; font-weight: 700; margin-bottom: 4px; }
+    .section-head p  { color: var(--muted); font-size: 0.85rem; }
+
+    /* ── CARD GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: all 0.2s; position: relative; overflow: hidden;
+    }
+    .card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent 60%, var(--glow));
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .card:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(124,106,248,0.18);
+    }
+    .card:hover::after { opacity: 1; }
+
+    .card-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; flex-shrink: 0;
+    }
+    .card-name { font-size: 0.97rem; font-weight: 700; }
+    .card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; flex: 1; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .card-tag {
+      display: inline-block; padding: 3px 9px;
+      border-radius: 100px; font-size: 0.68rem; font-weight: 600;
+      background: rgba(124,106,248,0.15); color: var(--accent);
+    }
+    .card-arrow { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+    .card:hover .card-arrow { transform: translateX(3px); color: var(--accent); }
+
+    /* subcat divider */
+    .subcat-title {
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 1px; margin: 22px 0 10px;
+      padding-bottom: 6px; border-bottom: 1px solid var(--border);
+    }
+    .subcat-title:first-child { margin-top: 0; }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { padding: 20px 16px; }
+      .nav-item .emoji { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="logo"><span>⚡</span> AI Hub</div>
+  <ul class="nav-list" id="topNav">
+    <li class="nav-item active" data-cat="chatbot"><span class="emoji">💬</span> AI 챗봇</li>
+    <li class="nav-item" data-cat="image"><span class="emoji">🎨</span> AI 이미지</li>
+    <li class="nav-item" data-cat="media"><span class="emoji">🎵</span> AI 영상/음악</li>
+    <li class="nav-item" data-cat="coding"><span class="emoji">💻</span> AI 코딩</li>
+    <li class="nav-item" data-cat="platform"><span class="emoji">🚀</span> AI 플랫폼</li>
+  </ul>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-label">카테고리</div>
+    <div id="sidebarItems"></div>
+  </aside>
+  <main class="main">
+    <div class="section-head">
+      <h2 id="sectionTitle">AI 챗봇</h2>
+      <p id="sectionDesc">대화형 AI 어시스턴트 서비스 모음</p>
+    </div>
+    <div id="cardsContainer"></div>
+  </main>
+</div>
+
+<script>
+const DATA = {
+  chatbot: {
+    title: "AI 챗봇",
+    desc: "대화형 AI 어시스턴트 서비스 모음",
+    subs: {
+      "범용 AI 챗봇": [
+        { name:"Claude",    url:"https://claude.ai",             icon:"🤖", bg:"rgba(180,83,9,.15)",    tag:"Anthropic", desc:"Anthropic의 AI 어시스턴트. 안전하고 신뢰할 수 있는 AI" },
+        { name:"ChatGPT",   url:"https://chat.openai.com",       icon:"💡", bg:"rgba(16,163,127,.15)",  tag:"OpenAI",    desc:"OpenAI의 대화형 AI. 가장 널리 사용되는 AI 챗봇" },
+        { name:"Gemini",    url:"https://gemini.google.com",     icon:"✨", bg:"rgba(66,133,244,.15)",  tag:"Google",    desc:"Google의 멀티모달 AI. 검색과 연동된 강력한 AI" },
+        { name:"Grok",      url:"https://grok.x.ai",             icon:"⚡", bg:"rgba(200,200,200,.1)",  tag:"xAI",       desc:"xAI의 AI 어시스턴트. X(트위터) 실시간 정보 접근 가능" },
+        { name:"Genspark",  url:"https://www.genspark.ai",       icon:"🔥", bg:"rgba(249,115,22,.15)", tag:"검색 AI",   desc:"AI 기반 검색 및 스파크페이지 자동 생성 서비스" },
+        { name:"Meta AI",   url:"https://www.meta.ai",           icon:"🌐", bg:"rgba(8,102,255,.15)",  tag:"Meta",      desc:"Meta의 AI 어시스턴트. Llama 모델 기반, 무료 제공" },
+      ],
+      "검색/리서치 AI": [
+        { name:"Perplexity", url:"https://www.perplexity.ai",   icon:"🔍", bg:"rgba(32,178,170,.15)",  tag:"검색",      desc:"AI 기반 검색 엔진. 출처를 제공하는 실시간 검색" },
+        { name:"You.com",    url:"https://you.com",             icon:"🔎", bg:"rgba(124,58,237,.15)",  tag:"검색",      desc:"AI 통합 검색 엔진. 다양한 AI 모델 선택 가능" },
+        { name:"Phind",      url:"https://www.phind.com",       icon:"🧑‍💻", bg:"rgba(5,150,105,.15)",  tag:"개발자",    desc:"개발자 특화 AI 검색 엔진. 코드 답변 제공" },
+      ],
+      "한국 AI 서비스": [
+        { name:"뤼튼",      url:"https://wrtn.ai",               icon:"🇰🇷", bg:"rgba(239,68,68,.15)",  tag:"국내",      desc:"국내 AI 서비스. Claude·GPT·Gemini 무료 제공" },
+        { name:"클로바X",   url:"https://clova-x.naver.com",    icon:"🟢", bg:"rgba(0,199,60,.15)",   tag:"네이버",    desc:"네이버의 AI 챗봇 서비스. 한국어 최적화" },
+        { name:"CLUE",      url:"https://clue.clovastudio.ai",  icon:"🔵", bg:"rgba(0,80,200,.15)",   tag:"네이버",    desc:"네이버 클로바 스튜디오 AI 플레이그라운드" },
+      ],
+    }
+  },
+  image: {
+    title: "AI 이미지",
+    desc: "AI 기반 이미지 생성 및 편집 서비스",
+    subs: {
+      "이미지 생성": [
+        { name:"Midjourney",    url:"https://www.midjourney.com",       icon:"🎨", bg:"rgba(99,102,241,.15)",  tag:"이미지",   desc:"고품질 AI 이미지 생성. 예술적 스타일로 유명" },
+        { name:"DALL-E 3",      url:"https://openai.com/dall-e-3",      icon:"🖼️", bg:"rgba(16,163,127,.15)",  tag:"OpenAI",   desc:"OpenAI의 이미지 생성 AI. ChatGPT와 통합" },
+        { name:"Stable Diffusion", url:"https://stability.ai",          icon:"🌀", bg:"rgba(139,92,246,.15)",  tag:"오픈소스", desc:"오픈소스 AI 이미지 생성 모델. 로컬 실행 가능" },
+        { name:"Leonardo AI",   url:"https://leonardo.ai",              icon:"🦁", bg:"rgba(245,158,11,.15)",  tag:"이미지",   desc:"게임 에셋 특화 AI 이미지 생성 플랫폼" },
+        { name:"Ideogram",      url:"https://ideogram.ai",              icon:"💫", bg:"rgba(236,72,153,.15)",  tag:"이미지",   desc:"텍스트 렌더링 특화 AI 이미지 생성" },
+        { name:"Adobe Firefly", url:"https://firefly.adobe.com",        icon:"🔥", bg:"rgba(255,0,0,.1)",      tag:"Adobe",    desc:"Adobe의 AI 이미지 생성. 상업적 사용 안전" },
+        { name:"Flux",          url:"https://fal.ai/models/fal-ai/flux",icon:"⚡", bg:"rgba(99,102,241,.15)",  tag:"이미지",   desc:"Black Forest Labs의 고성능 이미지 생성 모델" },
+        { name:"Bing Image Creator", url:"https://www.bing.com/images/create", icon:"🖌️", bg:"rgba(0,120,212,.15)", tag:"Microsoft", desc:"Microsoft DALL-E 기반 무료 이미지 생성" },
+      ],
+      "이미지 편집/합성": [
+        { name:"Whisk",      url:"https://labs.google/fx/tools/whisk", icon:"🌀", bg:"rgba(66,133,244,.15)",  tag:"Google",   desc:"Google의 이미지 합성 AI. 이미지로 새 이미지 생성" },
+        { name:"Remove.bg",  url:"https://www.remove.bg",              icon:"✂️", bg:"rgba(0,180,216,.15)",   tag:"편집",     desc:"AI 배경 자동 제거 서비스. 원클릭 투명 배경" },
+        { name:"Canva",      url:"https://www.canva.com",              icon:"🎭", bg:"rgba(0,196,204,.15)",   tag:"디자인",   desc:"디자인 플랫폼 + AI 이미지 생성 통합" },
+        { name:"Clipdrop",   url:"https://clipdrop.co",                icon:"📸", bg:"rgba(168,85,247,.15)",  tag:"편집",     desc:"Stability AI의 이미지 편집 도구 모음" },
+      ],
+    }
+  },
+  media: {
+    title: "AI 영상/음악",
+    desc: "AI 기반 영상, 음악, 음성 생성 서비스",
+    subs: {
+      "영상 생성": [
+        { name:"Runway ML", url:"https://runwayml.com",       icon:"🎬", bg:"rgba(0,255,135,.08)",   tag:"영상",    desc:"AI 영상 생성·편집 플랫폼의 선두주자. Gen-3" },
+        { name:"Pika",      url:"https://pika.art",           icon:"🎥", bg:"rgba(168,85,247,.15)",  tag:"영상",    desc:"텍스트·이미지로 영상 생성하는 AI 플랫폼" },
+        { name:"Kling AI",  url:"https://klingai.com",        icon:"🎞️", bg:"rgba(244,63,94,.15)",   tag:"영상",    desc:"Kuaishou의 고품질 AI 영상 생성 서비스" },
+        { name:"Sora",      url:"https://sora.com",           icon:"☁️", bg:"rgba(14,165,233,.15)",  tag:"OpenAI",  desc:"OpenAI의 AI 영상 생성 모델. 고해상도 영상" },
+        { name:"HeyGen",    url:"https://www.heygen.com",     icon:"👤", bg:"rgba(139,92,246,.15)",  tag:"아바타",  desc:"AI 아바타 영상 생성. 마케팅·교육·번역용" },
+        { name:"Luma AI",   url:"https://lumalabs.ai",        icon:"🌟", bg:"rgba(99,102,241,.15)",  tag:"영상",    desc:"Dream Machine — 고품질 AI 영상 생성" },
+      ],
+      "음악 생성": [
+        { name:"SUNO",   url:"https://suno.com",         icon:"🎵", bg:"rgba(245,158,11,.15)",  tag:"음악",   desc:"텍스트로 음악 생성. 가사+보컬+멜로디 완성" },
+        { name:"Udio",   url:"https://www.udio.com",     icon:"🎶", bg:"rgba(16,185,129,.15)",  tag:"음악",   desc:"고품질 AI 음악 생성 플랫폼" },
+        { name:"Mubert", url:"https://mubert.com",       icon:"🎸", bg:"rgba(99,102,241,.15)",  tag:"음악",   desc:"AI 생성 로열티 프리 음악 스트리밍" },
+      ],
+      "음성 합성": [
+        { name:"ElevenLabs",      url:"https://elevenlabs.io",         icon:"🎙️", bg:"rgba(255,107,53,.15)",  tag:"음성",   desc:"최고 품질의 AI 음성 합성 및 음성 클로닝" },
+        { name:"Replica Studios", url:"https://replicastudios.com",    icon:"🔊", bg:"rgba(59,130,246,.15)",  tag:"음성",   desc:"게임·미디어용 AI 음성 생성 서비스" },
+        { name:"Coqui TTS",       url:"https://coqui.ai",              icon:"🐸", bg:"rgba(34,197,94,.15)",   tag:"오픈소스",desc:"오픈소스 AI TTS 엔진. 다국어 지원" },
+      ],
+    }
+  },
+  coding: {
+    title: "AI 코딩",
+    desc: "AI 기반 코딩 어시스턴트 및 앱 빌더 서비스",
+    subs: {
+      "코딩 어시스턴트": [
+        { name:"GitHub Copilot", url:"https://github.com/features/copilot", icon:"🤖", bg:"rgba(110,64,201,.15)", tag:"GitHub",  desc:"GitHub & OpenAI의 AI 코딩 도우미. IDE 통합" },
+        { name:"Cursor",         url:"https://cursor.sh",                    icon:"📝", bg:"rgba(0,166,237,.15)",  tag:"에디터",  desc:"AI 내장 코드 에디터. Claude·GPT 멀티 모델" },
+        { name:"Windsurf",       url:"https://codeium.com/windsurf",         icon:"🏄", bg:"rgba(6,182,212,.15)",  tag:"에디터",  desc:"Codeium의 AI 코딩 에디터. 무료 플랜 제공" },
+        { name:"Replit",         url:"https://replit.com",                   icon:"💻", bg:"rgba(242,98,7,.15)",   tag:"IDE",     desc:"브라우저 기반 코딩 환경 + AI 도우미" },
+        { name:"Tabnine",        url:"https://www.tabnine.com",              icon:"⌨️", bg:"rgba(99,102,241,.15)", tag:"자동완성", desc:"AI 코드 자동완성 플러그인. 프라이버시 중심" },
+      ],
+      "AI 앱 빌더": [
+        { name:"Lovable",  url:"https://lovable.dev",  icon:"💜", bg:"rgba(147,51,234,.15)",  tag:"앱빌더",  desc:"AI로 풀스택 웹앱 생성. 디자인부터 배포까지" },
+        { name:"V0",       url:"https://v0.dev",        icon:"▲",  bg:"rgba(200,200,200,.08)", tag:"Vercel",  desc:"Vercel의 AI UI 컴포넌트 생성기. React/Tailwind" },
+        { name:"Bolt.new", url:"https://bolt.new",      icon:"⚡", bg:"rgba(245,158,11,.15)",  tag:"앱빌더",  desc:"StackBlitz의 AI 풀스택 앱 빌더. 즉시 배포" },
+        { name:"Tempo",    url:"https://www.tempo.new", icon:"🎯", bg:"rgba(225,29,72,.15)",   tag:"앱빌더",  desc:"React 앱을 위한 AI 비주얼 에디터" },
+        { name:"Dora AI",  url:"https://www.dora.run",  icon:"🎨", bg:"rgba(99,102,241,.15)",  tag:"노코드",  desc:"AI 노코드 웹사이트 빌더. 3D 효과 지원" },
+      ],
+    }
+  },
+  platform: {
+    title: "AI 플랫폼",
+    desc: "AI 모델, 도구, 연구를 위한 플랫폼 및 커뮤니티",
+    subs: {
+      "모델 허브": [
+        { name:"Hugging Face", url:"https://huggingface.co",          icon:"🤗", bg:"rgba(255,157,0,.15)",  tag:"허브",    desc:"AI 모델·데이터셋·데모 공유 플랫폼. AI의 GitHub" },
+        { name:"Ollama",       url:"https://ollama.ai",               icon:"🦙", bg:"rgba(103,232,249,.1)", tag:"로컬",    desc:"로컬에서 LLM 실행. 오픈소스 모델 관리" },
+        { name:"Together AI",  url:"https://www.together.ai",         icon:"🔧", bg:"rgba(99,102,241,.15)", tag:"API",     desc:"오픈소스 AI 모델 API 제공 플랫폼" },
+        { name:"Replicate",    url:"https://replicate.com",           icon:"♻️", bg:"rgba(124,58,237,.15)", tag:"API",     desc:"클라우드에서 AI 모델 실행 API" },
+        { name:"OpenRouter",   url:"https://openrouter.ai",           icon:"🔀", bg:"rgba(14,165,233,.15)", tag:"API",     desc:"다양한 AI 모델을 단일 API로 통합 제공" },
+      ],
+      "개발 플랫폼": [
+        { name:"GitHub",        url:"https://github.com",                        icon:"🐙", bg:"rgba(226,232,240,.08)", tag:"코드",    desc:"코드 호스팅 및 협업 플랫폼. AI 프로젝트의 허브" },
+        { name:"Google Colab",  url:"https://colab.research.google.com",         icon:"📓", bg:"rgba(249,171,0,.15)",   tag:"Notebook",desc:"무료 GPU/TPU 제공 Python 노트북 환경" },
+        { name:"Kaggle",        url:"https://www.kaggle.com",                    icon:"🏆", bg:"rgba(32,190,255,.15)",  tag:"데이터",  desc:"데이터 과학 경진대회 및 공개 데이터셋 플랫폼" },
+        { name:"Weights & Biases", url:"https://wandb.ai",                       icon:"📊", bg:"rgba(255,190,0,.15)",   tag:"MLOps",   desc:"ML 실험 추적 및 모델 관리 플랫폼" },
+        { name:"LangChain",     url:"https://www.langchain.com",                 icon:"⛓️", bg:"rgba(5,150,105,.15)",   tag:"프레임워크", desc:"LLM 앱 개발 프레임워크. AI 에이전트 구축" },
+      ],
+      "AI 연구/뉴스": [
+        { name:"Papers With Code", url:"https://paperswithcode.com",             icon:"📄", bg:"rgba(33,203,206,.15)", tag:"논문",  desc:"AI 논문과 구현 코드를 연결하는 플랫폼" },
+        { name:"Arxiv AI",         url:"https://arxiv.org/list/cs.AI/recent",    icon:"🔬", bg:"rgba(179,27,27,.15)",  tag:"논문",  desc:"AI/ML 최신 논문 프리프린트 서버" },
+        { name:"The Rundown AI",   url:"https://www.therundown.ai",              icon:"📰", bg:"rgba(100,116,139,.15)",tag:"뉴스",  desc:"AI 최신 뉴스 뉴스레터 및 정보 허브" },
+      ],
+    }
+  },
+};
+
+let currentCat = 'chatbot';
+let currentSub = null;
+
+function renderSidebar(cat) {
+  const el = document.getElementById('sidebarItems');
+  const subs = Object.keys(DATA[cat].subs);
+  el.innerHTML = '';
+
+  const all = div('sidebar-item' + (currentSub === null ? ' active' : ''), '전체');
+  all.onclick = () => selectSub(null);
+  el.appendChild(all);
+
+  subs.forEach(s => {
+    const item = div('sidebar-item' + (currentSub === s ? ' active' : ''), s);
+    item.onclick = () => selectSub(s);
+    el.appendChild(item);
+  });
+}
+
+function renderCards(cat, sub) {
+  const container = document.getElementById('cardsContainer');
+  container.innerHTML = '';
+
+  const subs = DATA[cat].subs;
+  const keys = sub ? [sub] : Object.keys(subs);
+
+  keys.forEach(k => {
+    if (!sub) {
+      const title = div('subcat-title', k);
+      container.appendChild(title);
+    }
+    const grid = document.createElement('div');
+    grid.className = 'cards-grid';
+    subs[k].forEach(c => {
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = c.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.innerHTML = `
+        <div class="card-icon" style="background:${c.bg}">${c.icon}</div>
+        <div class="card-name">${c.name}</div>
+        <div class="card-desc">${c.desc}</div>
+        <div class="card-footer">
+          <span class="card-tag">${c.tag}</span>
+          <span class="card-arrow">→</span>
+        </div>`;
+      grid.appendChild(a);
+    });
+    container.appendChild(grid);
+  });
+}
+
+function selectCat(cat) {
+  currentCat = cat; currentSub = null;
+  document.querySelectorAll('.nav-item').forEach(el =>
+    el.classList.toggle('active', el.dataset.cat === cat));
+  document.getElementById('sectionTitle').textContent = DATA[cat].title;
+  document.getElementById('sectionDesc').textContent  = DATA[cat].desc;
+  renderSidebar(cat);
+  renderCards(cat, null);
+}
+
+function selectSub(sub) {
+  currentSub = sub;
+  document.querySelectorAll('.sidebar-item').forEach(el =>
+    el.classList.toggle('active', el.textContent === (sub || '전체')));
+  document.getElementById('sectionTitle').textContent = sub || DATA[currentCat].title;
+  renderCards(currentCat, sub);
+}
+
+function div(cls, text) {
+  const el = document.createElement('div');
+  el.className = cls; el.textContent = text; return el;
+}
+
+document.querySelectorAll('.nav-item').forEach(el =>
+  el.addEventListener('click', () => selectCat(el.dataset.cat)));
+
+selectCat('chatbot');
+</script>
+</body>
+</html>
