@@ -7,210 +7,149 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --bg: #0d1117; --bg-nav: rgba(13,17,23,0.95); --bg-side: #0d1117;
-      --bg-card: #161b22; --border: #21262d; --primary: #7c6af8;
-      --accent: #a5b4fc; --text: #e6edf3; --muted: #7d8590;
-      --glow: rgba(124,106,248,0.18); --nav-h: 58px; --search-h: 46px;
+      --bg:#0d1117; --bg-nav:rgba(13,17,23,0.95); --bg-side:#0d1117;
+      --bg-card:#161b22; --border:#21262d; --primary:#7c6af8;
+      --accent:#a5b4fc; --text:#e6edf3; --muted:#7d8590;
+      --glow:rgba(124,106,248,0.18); --nav-h:58px; --search-h:46px;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
 
-    /* ── TOP NAV ── */
+    /* NAV */
     .top-nav {
-      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
-      background: var(--bg-nav); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; padding: 0 20px;
-      z-index: 200; gap: 20px; overflow-x: auto;
+      position:fixed; top:0; left:0; right:0; height:var(--nav-h);
+      background:var(--bg-nav); backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; padding:0 20px;
+      z-index:200; gap:16px; overflow-x:auto;
     }
-    .top-nav::-webkit-scrollbar { display: none; }
+    .top-nav::-webkit-scrollbar { display:none; }
     .logo {
-      font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #a5b4fc, #7c6af8);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      white-space: nowrap; flex-shrink: 0;
+      font-size:1.1rem; font-weight:800; letter-spacing:-0.5px;
+      background:linear-gradient(135deg,#a5b4fc,#7c6af8);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      white-space:nowrap; flex-shrink:0;
     }
-    .nav-list { display: flex; gap: 3px; list-style: none; }
+    .nav-list { display:flex; gap:2px; list-style:none; }
     .nav-item {
-      padding: 6px 12px; border-radius: 8px; cursor: pointer;
-      color: var(--muted); font-size: 0.82rem; font-weight: 500;
-      transition: all 0.18s; white-space: nowrap;
+      padding:6px 12px; border-radius:8px; cursor:pointer;
+      color:var(--muted); font-size:0.81rem; font-weight:500;
+      transition:all 0.18s; white-space:nowrap;
     }
-    .nav-item:hover { background: rgba(124,106,248,0.1); color: var(--text); }
-    .nav-item.active { background: var(--primary); color: #fff; box-shadow: 0 0 14px rgba(124,106,248,0.35); }
-    .nav-item.bm-nav.active { background: #92400e; box-shadow: 0 0 14px rgba(251,191,36,0.35); }
+    .nav-item:hover { background:rgba(124,106,248,0.1); color:var(--text); }
+    .nav-item.active { background:var(--primary); color:#fff; box-shadow:0 0 14px rgba(124,106,248,0.35); }
+    .nav-item.bm-nav.active { background:#92400e; box-shadow:0 0 14px rgba(251,191,36,0.35); }
 
-    /* ── SEARCH BAR (below nav) ── */
+    /* SEARCH BAR */
     .search-bar {
-      position: fixed; top: var(--nav-h); left: 0; right: 0; height: var(--search-h);
-      background: rgba(13,17,23,0.97); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; padding: 0 20px; gap: 12px;
-      z-index: 190;
+      position:fixed; top:var(--nav-h); left:0; right:0; height:var(--search-h);
+      background:rgba(13,17,23,0.97); backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; padding:0 20px; gap:12px; z-index:190;
     }
-    .search-wrap { position: relative; flex: 1; max-width: 480px; }
-    .search-wrap svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+    .search-wrap { position:relative; flex:1; max-width:480px; }
+    .search-wrap svg { position:absolute; left:11px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
     .search-input {
-      width: 100%; padding: 8px 12px 8px 32px;
-      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
-      border-radius: 20px; color: var(--text); font-size: 0.83rem;
-      outline: none; transition: border-color 0.18s;
+      width:100%; padding:8px 12px 8px 32px;
+      background:rgba(255,255,255,0.06); border:1px solid var(--border);
+      border-radius:20px; color:var(--text); font-size:0.83rem;
+      outline:none; transition:border-color 0.18s;
     }
-    .search-input:focus { border-color: var(--primary); background: rgba(124,106,248,0.06); }
-    .search-input::placeholder { color: var(--muted); }
-    .search-count { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+    .search-input:focus { border-color:var(--primary); background:rgba(124,106,248,0.06); }
+    .search-input::placeholder { color:var(--muted); }
+    .search-count { font-size:0.74rem; color:var(--muted); white-space:nowrap; }
 
-    /* ── LAYOUT ── */
+    /* LAYOUT */
     .layout {
-      display: flex;
-      margin-top: calc(var(--nav-h) + var(--search-h));
-      min-height: calc(100vh - var(--nav-h) - var(--search-h));
+      display:flex;
+      margin-top:calc(var(--nav-h) + var(--search-h));
+      min-height:calc(100vh - var(--nav-h) - var(--search-h));
     }
 
-    /* ── SIDEBAR ── */
+    /* SIDEBAR */
     .sidebar {
-      width: 200px; flex-shrink: 0; background: var(--bg-side);
-      border-right: 1px solid var(--border);
-      position: sticky; top: calc(var(--nav-h) + var(--search-h));
-      height: calc(100vh - var(--nav-h) - var(--search-h));
-      display: flex; flex-direction: column; overflow: hidden;
+      width:200px; flex-shrink:0; background:var(--bg-side);
+      border-right:1px solid var(--border);
+      position:sticky; top:calc(var(--nav-h) + var(--search-h));
+      height:calc(100vh - var(--nav-h) - var(--search-h));
+      display:flex; flex-direction:column; overflow:hidden;
     }
-    .sidebar-cats {
-      flex: 1; overflow-y: auto; min-height: 0;
-      padding: 14px 10px 8px;
-    }
-    .sidebar-cats::-webkit-scrollbar { width: 3px; }
-    .sidebar-cats::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-    .sidebar-filters {
-      flex-shrink: 0; padding: 10px 10px 16px;
-      border-top: 1px solid var(--border);
-    }
-    .sidebar-label {
-      font-size: 0.66rem; font-weight: 700; color: var(--muted);
-      text-transform: uppercase; letter-spacing: 1.2px;
-      padding: 0 8px; margin-bottom: 6px;
-    }
-    .sidebar-item {
-      padding: 8px 10px; border-radius: 8px; cursor: pointer;
-      color: var(--muted); font-size: 0.82rem; transition: all 0.16s;
-      margin-bottom: 2px;
-    }
-    .sidebar-item:hover { background: rgba(124,106,248,0.08); color: var(--text); }
-    .sidebar-item.active {
-      background: rgba(124,106,248,0.15); color: var(--accent);
-      font-weight: 600; border-left: 3px solid var(--primary);
-    }
+    .sidebar-cats { flex:1; overflow-y:auto; min-height:0; padding:14px 10px 8px; }
+    .sidebar-cats::-webkit-scrollbar { width:3px; }
+    .sidebar-cats::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+    .sidebar-filters { flex-shrink:0; padding:10px 10px 16px; border-top:1px solid var(--border); }
+    .sidebar-label { font-size:0.66rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:1.2px; padding:0 8px; margin-bottom:6px; }
+    .sidebar-item { padding:8px 10px; border-radius:8px; cursor:pointer; color:var(--muted); font-size:0.82rem; transition:all 0.16s; margin-bottom:2px; }
+    .sidebar-item:hover { background:rgba(124,106,248,0.08); color:var(--text); }
+    .sidebar-item.active { background:rgba(124,106,248,0.15); color:var(--accent); font-weight:600; border-left:3px solid var(--primary); }
 
-    /* ── FILTERS ── */
-    .filter-opts { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
-    .filter-opt {
-      display: flex; align-items: center; gap: 8px;
-      padding: 6px 10px; border-radius: 8px; cursor: pointer;
-      color: var(--muted); font-size: 0.81rem; transition: all 0.16s; user-select: none;
-    }
-    .filter-opt:hover { background: rgba(124,106,248,0.08); color: var(--text); }
-    .filter-opt.active { background: rgba(124,106,248,0.15); color: var(--accent); }
-    .fchk {
-      width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0;
-      border: 1.5px solid var(--muted); display: flex;
-      align-items: center; justify-content: center; font-size: 0.6rem; transition: all 0.16s;
-    }
-    .filter-opt.active .fchk { background: var(--primary); border-color: var(--primary); color: #fff; }
+    /* FILTER */
+    .filter-opts { display:flex; flex-direction:column; gap:2px; margin-top:6px; }
+    .filter-opt { display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:8px; cursor:pointer; color:var(--muted); font-size:0.81rem; transition:all 0.16s; user-select:none; }
+    .filter-opt:hover { background:rgba(124,106,248,0.08); color:var(--text); }
+    .filter-opt.active { background:rgba(124,106,248,0.15); color:var(--accent); }
+    .fchk { width:14px; height:14px; border-radius:4px; flex-shrink:0; border:1.5px solid var(--muted); display:flex; align-items:center; justify-content:center; font-size:0.6rem; transition:all 0.16s; }
+    .filter-opt.active .fchk { background:var(--primary); border-color:var(--primary); color:#fff; }
 
-    /* ── MAIN ── */
-    .main { flex: 1; padding: 24px 26px; overflow-y: auto; }
-    .section-head { margin-bottom: 20px; }
-    .section-head h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 3px; }
-    .section-head p { color: var(--muted); font-size: 0.83rem; }
-    .subcat-title {
-      font-size: 0.74rem; font-weight: 700; color: var(--muted);
-      text-transform: uppercase; letter-spacing: 1px;
-      margin: 22px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
-    }
-    .subcat-title:first-child { margin-top: 0; }
+    /* MAIN */
+    .main { flex:1; padding:24px 26px; overflow-y:auto; }
+    .section-head { margin-bottom:20px; }
+    .section-head h2 { font-size:1.35rem; font-weight:700; margin-bottom:3px; }
+    .section-head p { color:var(--muted); font-size:0.83rem; }
+    .subcat-title { font-size:0.74rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:22px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+    .subcat-title:first-child { margin-top:0; }
+    .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(205px,1fr)); gap:12px; }
 
-    /* ── CARD GRID ── */
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)); gap: 12px; }
-
-    /* ── CARD ── */
+    /* CARD */
     .card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 16px; text-decoration: none; color: inherit;
-      display: flex; flex-direction: column; gap: 8px;
-      transition: all 0.2s; position: relative; overflow: hidden;
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:14px; padding:16px; text-decoration:none; color:inherit;
+      display:flex; flex-direction:column; gap:8px;
+      transition:all 0.2s; position:relative; overflow:hidden;
     }
-    .card::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, transparent 60%, var(--glow));
-      opacity: 0; transition: opacity 0.2s;
-    }
-    .card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(124,106,248,0.18); }
-    .card:hover::after { opacity: 1; }
-
-    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; }
-    .card-icon {
-      width: 42px; height: 42px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; overflow: hidden; font-size: 1.3rem;
-    }
-    .card-favicon { width: 28px; height: 28px; object-fit: contain; display: block; }
-    .bm-btn {
-      background: none; border: none; cursor: pointer;
-      font-size: 1rem; color: var(--muted); padding: 2px;
-      line-height: 1; transition: all 0.2s; flex-shrink: 0; position: relative; z-index: 1;
-    }
-    .bm-btn:hover { color: #fbbf24; transform: scale(1.25); }
-    .bm-btn.active { color: #fbbf24; }
-
-    .card-name { font-size: 0.93rem; font-weight: 700; }
-    .card-stars { font-size: 0.8rem; letter-spacing: 1px; line-height: 1; }
-    .card-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.55; flex: 1; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
-    .card-tag {
-      padding: 2px 8px; border-radius: 100px; font-size: 0.67rem; font-weight: 600;
-      background: rgba(124,106,248,0.15); color: var(--accent);
-    }
-    .filter-badges { display: flex; flex-wrap: wrap; gap: 3px; }
-    .fbadge {
-      padding: 2px 6px; border-radius: 100px; font-size: 0.62rem; font-weight: 600;
-    }
-    .fbadge.free { background: rgba(34,197,94,.15); color: #4ade80; }
-    .fbadge.ko   { background: rgba(239,68,68,.15);  color: #f87171; }
-    .fbadge.api  { background: rgba(14,165,233,.15); color: #38bdf8; }
-    .fbadge.oss  { background: rgba(245,158,11,.15); color: #fbbf24; }
-    .card-arrow { color: var(--muted); font-size: 0.78rem; transition: transform 0.2s; flex-shrink: 0; }
-    .card:hover .card-arrow { transform: translateX(3px); color: var(--accent); }
-
-    /* ── EMPTY STATE ── */
-    .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
-    .empty-state .es-icon { font-size: 3rem; margin-bottom: 14px; }
-    .empty-state h3 { color: var(--text); margin-bottom: 8px; font-size: 1.05rem; }
-    .empty-state p { font-size: 0.83rem; line-height: 1.7; }
-
-    @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .main { padding: 16px 14px; }
-      .search-bar { padding: 0 14px; }
-    }
+    .card::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,transparent 60%,var(--glow)); opacity:0; transition:opacity 0.2s; }
+    .card:hover { border-color:var(--primary); transform:translateY(-3px); box-shadow:0 8px 28px rgba(124,106,248,0.18); }
+    .card:hover::after { opacity:1; }
+    .card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:6px; }
+    .card-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; font-size:1.3rem; }
+    .card-favicon { width:28px; height:28px; object-fit:contain; display:block; }
+    .bm-btn { background:none; border:none; cursor:pointer; font-size:1rem; color:var(--muted); padding:2px; line-height:1; transition:all 0.2s; flex-shrink:0; position:relative; z-index:1; }
+    .bm-btn:hover { color:#fbbf24; transform:scale(1.25); }
+    .bm-btn.active { color:#fbbf24; }
+    .card-name { font-size:0.93rem; font-weight:700; }
+    .card-stars { font-size:0.78rem; letter-spacing:1px; }
+    .card-desc { font-size:0.76rem; color:var(--muted); line-height:1.55; flex:1; }
+    .card-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px; }
+    .card-tag { padding:2px 8px; border-radius:100px; font-size:0.67rem; font-weight:600; background:rgba(124,106,248,0.15); color:var(--accent); }
+    .filter-badges { display:flex; flex-wrap:wrap; gap:3px; }
+    .fbadge { padding:2px 6px; border-radius:100px; font-size:0.62rem; font-weight:600; }
+    .fbadge.free { background:rgba(34,197,94,.15); color:#4ade80; }
+    .fbadge.ko   { background:rgba(239,68,68,.15);  color:#f87171; }
+    .fbadge.api  { background:rgba(14,165,233,.15); color:#38bdf8; }
+    .fbadge.oss  { background:rgba(245,158,11,.15); color:#fbbf24; }
+    .card-arrow { color:var(--muted); font-size:0.78rem; transition:transform 0.2s; flex-shrink:0; }
+    .card:hover .card-arrow { transform:translateX(3px); color:var(--accent); }
+    .empty-state { text-align:center; padding:60px 20px; color:var(--muted); }
+    .empty-state .es-icon { font-size:3rem; margin-bottom:14px; }
+    .empty-state h3 { color:var(--text); margin-bottom:8px; font-size:1.05rem; }
+    .empty-state p { font-size:0.83rem; line-height:1.7; }
+    @media(max-width:768px) { .sidebar{display:none;} .main{padding:16px 14px;} }
   </style>
 </head>
 <body>
 
-<!-- TOP NAV -->
 <nav class="top-nav">
   <div class="logo">⚡ AI Hub</div>
   <ul class="nav-list" id="topNav">
-    <li class="nav-item bm-nav" data-cat="bookmarks">⭐ 즐겨찾기</li>
-    <li class="nav-item" data-cat="chatbot">💬 AI 챗봇</li>
-    <li class="nav-item" data-cat="image">🎨 AI 이미지</li>
-    <li class="nav-item" data-cat="media">🎵 AI 영상/음악</li>
-    <li class="nav-item" data-cat="coding">💻 AI 코딩</li>
-    <li class="nav-item" data-cat="design">🖌️ AI 디자인</li>
+    <li class="nav-item bm-nav"   data-cat="bookmarks">⭐ 즐겨찾기</li>
+    <li class="nav-item" data-cat="assistant">💬 AI 어시스턴트</li>
+    <li class="nav-item" data-cat="creative">🎨 AI 크리에이티브</li>
+    <li class="nav-item" data-cat="devtools">💻 개발 도구</li>
+    <li class="nav-item" data-cat="design">🖌️ UI/UX 디자인</li>
     <li class="nav-item" data-cat="productivity">✨ AI 생산성</li>
-    <li class="nav-item" data-cat="platform">🚀 AI 플랫폼</li>
+    <li class="nav-item" data-cat="research">🔬 AI 리서치</li>
   </ul>
 </nav>
 
-<!-- SEARCH BAR -->
 <div class="search-bar">
   <div class="search-wrap">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -219,7 +158,6 @@
   <span class="search-count" id="searchCount"></span>
 </div>
 
-<!-- LAYOUT -->
 <div class="layout">
   <aside class="sidebar">
     <div class="sidebar-cats">
@@ -236,7 +174,6 @@
       </div>
     </div>
   </aside>
-
   <main class="main">
     <div class="section-head">
       <h2 id="sectionTitle">즐겨찾기</h2>
@@ -247,432 +184,393 @@
 </div>
 
 <script>
-const FAVICON = d => `https://www.google.com/s2/favicons?domain=${d}&sz=64`;
-
-// ── 별점 (5점 만점, 인기도·완성도·활성화 기준) ──
-const STARS = {
-  "Claude":5,"ChatGPT":5,"Gemini":4,"Grok":4,"Genspark":3,"Meta AI":4,
-  "Microsoft Copilot":4,"Le Chat":3,"Poe":4,"Character.AI":4,
-  "Perplexity":5,"You.com":3,"Phind":4,"Elicit":4,"Consensus":3,
+const FAVICON = d=>`https://www.google.com/s2/favicons?domain=${d}&sz=64`;
+const STARS_MAP = {
+  "Claude":5,"ChatGPT":5,"Gemini":4,"Grok":4,"Genspark":3,"Meta AI":4,"Microsoft Copilot":4,
+  "Le Chat":3,"Poe":4,"Character.AI":4,"DeepSeek":5,"Kimi":3,"Qwen":3,
+  "Perplexity":5,"You.com":3,"Phind":4,"Elicit":4,"Consensus":3,"NotebookLM":5,
   "뤼튼":4,"클로바X":3,"HyperCLOVA X":3,"KakaoAI":3,
-  "Midjourney":5,"DALL-E 3":4,"Stable Diffusion":4,"Leonardo AI":4,
-  "Ideogram":4,"Adobe Firefly":4,"Flux":4,"Bing Image Creator":3,
-  "Playground AI":3,"Krea AI":4,"Freepik AI":3,"NightCafe":3,
+  "Midjourney":5,"DALL-E 3":4,"Stable Diffusion":4,"Leonardo AI":4,"Ideogram":4,
+  "Adobe Firefly":4,"Flux":4,"Bing Image Creator":3,"Playground AI":3,"Krea AI":4,
+  "Freepik AI":3,"NightCafe":3,
   "Whisk":3,"Remove.bg":4,"Canva":5,"Clipdrop":4,"Magnific AI":4,"PhotoRoom":4,
   "Runway ML":5,"Pika":4,"Kling AI":4,"Sora":4,"HeyGen":4,"Luma AI":4,
   "Synthesia":4,"Invideo AI":3,"Descript":4,
   "SUNO":5,"Udio":4,"Mubert":3,"Soundraw":3,"Boomy":3,
   "ElevenLabs":5,"Replica Studios":3,"Typecast":3,
+  "Lovable":5,"V0":5,"Bolt.new":5,"Framer":4,"Gamma":5,
   "GitHub Copilot":5,"Cursor":5,"Windsurf":4,"Replit":4,"Tabnine":3,
   "Amazon Q":3,"Codeium":4,"Aider":4,
-  "Google AI Studio":5,"Lovable":5,"V0":5,"Bolt.new":5,
-  "Tempo":3,"Dora AI":3,"Vercel":5,"Supabase":5,
-  "Figma":5,"Uizard":4,"Galileo AI":4,"Visily":3,"Framer":4,"Penpot":3,
-  "Webflow":5,"Wix AI":4,"Relume":4,"Durable":3,"Hostinger AI":3,
-  "Looka":4,"Brandmark":3,"Designs.ai":3,"Namecheap Logo":3,
-  "Locofy":4,"Anima":3,"DhiWise":3,"Builder.io":4,
-  "Gamma":5,"Tome":3,"Beautiful.ai":4,"SlidesAI":3,"Notion AI":5,"Obsidian":4,
-  "Jasper AI":4,"Copy.ai":4,"Writesonic":3,"Grammarly":5,"QuillBot":4,"DeepL":5,
-  "Zapier AI":4,"Make":4,"n8n":4,"Dify":4,"Taskade":3,
+  "Google AI Studio":5,"Anthropic Console":5,"OpenAI Platform":5,"Groq Cloud":4,"Fireworks AI":3,
   "Hugging Face":5,"Ollama":4,"Together AI":4,"Replicate":4,"OpenRouter":4,
-  "Groq":4,"Mistral AI":4,
-  "GitHub":5,"Google Colab":5,"Kaggle":4,"Weights & Biases":4,
-  "LangChain":4,"LlamaIndex":4,
-  "Papers With Code":4,"Arxiv AI":4,"The Rundown AI":3,"AI News":3,"TLDR AI":3,
+  "Pinecone":4,"LangChain":4,"LlamaIndex":4,"Dify":4,
+  "GitHub":5,"GitLab":4,"Bitbucket":3,
+  "Google Colab":5,"Kaggle":4,"Weights & Biases":4,
+  "Figma":5,"Penpot":3,"Uizard":4,"Galileo AI":4,"Visily":3,
+  "Webflow":5,"Wix AI":4,"Relume":4,"Durable":3,
+  "Looka":4,"Brandmark":3,"Locofy":4,"Anima":3,"Builder.io":4,
+  "Unsplash":5,"Coolors":5,"Fontshare":4,"Fontpair":4,"Iconify":5,
+  "LottieFiles":5,"Rive":4,"Spline":4,"Shots.so":4,"Contrast":4,
+  "Dribbble":5,"Behance":4,"Awwwards":4,"Mobbin":5,"Refero":4,
+  "UI Garage":3,"Land-book":4,"SaaS Pages":4,"Pinterest":4,"GDWeb":3,
+  "Muzli":4,"Screenlane":4,"Bestfolios":4,"One Page Love":4,"Siteinspire":4,
+  "Laws of UX":5,"Nielsen Norman":5,"Material Design":5,"Apple HIG":5,
+  "Smashing Magazine":4,"UX Collective":4,"Checklist Design":4,
+  "Anthropic":5,"OpenAI":5,"Google DeepMind":5,"xAI":4,
+  "Meta AI Research":4,"Mistral AI":4,"Cohere":4,
+  "Papers With Code":4,"Arxiv AI":4,"Semantic Scholar":4,
+  "DeepLearning.AI":5,"Fast.ai":4,
+  "The Rundown AI":3,"The Batch":4,"Hacker News":5,"r/MachineLearning":4,"TLDR AI":3,
+  "Notion AI":5,"Obsidian":4,"Beautiful.ai":4,"SlidesAI":3,"Tome":3,
+  "Jasper AI":4,"Copy.ai":4,"Writesonic":3,"Grammarly":5,"QuillBot":4,"DeepL":5,
+  "Zapier AI":4,"Make":4,"n8n":4,"Taskade":3,
 };
-
-function stars(n) {
-  return Array.from({length:5},(_,i)=>
-    `<span style="color:${i<n?'#fbbf24':'#374151'}">★</span>`
-  ).join('');
-}
+function stars(n){return Array.from({length:5},(_,i)=>`<span style="color:${i<n?'#fbbf24':'#374151'}">★</span>`).join('');}
 
 const DATA = {
-  chatbot: {
-    title:"AI 챗봇", desc:"대화형 AI 어시스턴트 서비스 모음",
-    subs: {
-      "범용 AI 챗봇": [
-        {name:"Claude",           url:"https://claude.ai",                icon:"🤖",bg:"rgba(180,83,9,.15)",   tag:"Anthropic", desc:"Anthropic의 AI 어시스턴트. 안전하고 신뢰할 수 있는 AI",              domain:"claude.ai",             filters:["api"]},
-        {name:"ChatGPT",          url:"https://chat.openai.com",          icon:"💡",bg:"rgba(16,163,127,.15)", tag:"OpenAI",    desc:"OpenAI의 대화형 AI. 가장 널리 사용되는 AI 챗봇",                 domain:"chat.openai.com",       filters:["api"]},
+  assistant:{
+    title:"AI 어시스턴트", desc:"대화형 AI 챗봇 & 리서치 도구",
+    subs:{
+      "챗봇 & LLM":[
+        {name:"Claude",           url:"https://claude.ai",                icon:"🤖",bg:"rgba(180,83,9,.15)",   tag:"Anthropic", desc:"Anthropic의 AI 어시스턴트. 안전하고 신뢰할 수 있는 AI",            domain:"claude.ai",             filters:["api"]},
+        {name:"ChatGPT",          url:"https://chatgpt.com",              icon:"💡",bg:"rgba(16,163,127,.15)", tag:"OpenAI",    desc:"OpenAI의 대화형 GPT 모델. 가장 널리 사용되는 AI 챗봇",            domain:"chatgpt.com",           filters:["api"]},
         {name:"Gemini",           url:"https://gemini.google.com",        icon:"✨",bg:"rgba(66,133,244,.15)", tag:"Google",    desc:"Google의 멀티모달 AI. 검색과 연동된 강력한 AI",                  domain:"gemini.google.com",     filters:["free","api"]},
         {name:"Grok",             url:"https://grok.x.ai",                icon:"⚡",bg:"rgba(200,200,200,.1)", tag:"xAI",       desc:"xAI의 AI 어시스턴트. X(트위터) 실시간 정보 접근 가능",           domain:"grok.x.ai",             filters:["free"]},
-        {name:"Genspark",         url:"https://www.genspark.ai",          icon:"🔥",bg:"rgba(249,115,22,.15)",tag:"검색AI",    desc:"AI 기반 검색 및 스파크페이지 자동 생성 서비스",                  domain:"genspark.ai",           filters:["free"]},
+        {name:"Genspark",         url:"https://www.genspark.ai",          icon:"🔥",bg:"rgba(249,115,22,.15)",tag:"검색AI",    desc:"AI 기반 검색 및 슈퍼 에이전트 플랫폼",                          domain:"genspark.ai",           filters:["free"]},
         {name:"Meta AI",          url:"https://www.meta.ai",              icon:"🌐",bg:"rgba(8,102,255,.15)",  tag:"Meta",      desc:"Meta의 AI 어시스턴트. Llama 모델 기반, 무료 제공",               domain:"meta.ai",               filters:["free","api"]},
-        {name:"Microsoft Copilot",url:"https://copilot.microsoft.com",   icon:"🪟",bg:"rgba(0,120,212,.15)",  tag:"Microsoft", desc:"Microsoft의 AI 어시스턴트. GPT-4 기반, Bing 통합",               domain:"copilot.microsoft.com", filters:["free"]},
-        {name:"Le Chat",          url:"https://chat.mistral.ai",          icon:"🐱",bg:"rgba(255,165,0,.15)",  tag:"Mistral",   desc:"Mistral AI의 챗봇. 유럽산 오픈소스 LLM",                        domain:"chat.mistral.ai",       filters:["free","api","oss"]},
+        {name:"Microsoft Copilot",url:"https://copilot.microsoft.com",    icon:"🪟",bg:"rgba(0,120,212,.15)",  tag:"Microsoft", desc:"Microsoft × OpenAI 통합 AI. Bing 검색 연동",                    domain:"copilot.microsoft.com", filters:["free"]},
+        {name:"Le Chat",          url:"https://chat.mistral.ai",          icon:"🐱",bg:"rgba(255,165,0,.15)",  tag:"Mistral",   desc:"Mistral AI의 유럽산 챗봇. 오픈소스 LLM 기반",                   domain:"chat.mistral.ai",       filters:["free","api","oss"]},
+        {name:"DeepSeek",         url:"https://chat.deepseek.com",        icon:"🔵",bg:"rgba(0,120,255,.15)",  tag:"DeepSeek",  desc:"중국 오픈소스 강자. 높은 추론 성능, 무료 제공",                  domain:"chat.deepseek.com",     filters:["free","oss"]},
+        {name:"Kimi",             url:"https://kimi.ai",                  icon:"🌙",bg:"rgba(99,102,241,.15)", tag:"Moonshot",  desc:"Moonshot AI의 긴 컨텍스트 LLM. 방대한 문서 처리",               domain:"kimi.ai",               filters:["free"]},
+        {name:"Qwen",             url:"https://chat.qwen.ai",             icon:"☁️",bg:"rgba(255,102,0,.15)",  tag:"Alibaba",   desc:"Alibaba의 다국어 대형 언어 모델",                               domain:"chat.qwen.ai",          filters:["free","oss"]},
         {name:"Poe",              url:"https://poe.com",                  icon:"🔮",bg:"rgba(124,58,237,.15)", tag:"Quora",     desc:"Claude·GPT·Gemini 등 다양한 AI를 한 곳에서",                    domain:"poe.com",               filters:["free"]},
         {name:"Character.AI",     url:"https://character.ai",             icon:"🎭",bg:"rgba(236,72,153,.15)", tag:"캐릭터",    desc:"다양한 AI 캐릭터와 대화. 롤플레이 특화",                         domain:"character.ai",          filters:["free"]},
       ],
-      "검색/리서치 AI": [
-        {name:"Perplexity",url:"https://www.perplexity.ai", icon:"🔍",bg:"rgba(32,178,170,.15)", tag:"검색",   desc:"AI 기반 검색 엔진. 출처를 제공하는 실시간 검색", domain:"perplexity.ai", filters:["free","api"]},
-        {name:"You.com",   url:"https://you.com",           icon:"🔎",bg:"rgba(124,58,237,.15)", tag:"검색",   desc:"AI 통합 검색 엔진. 다양한 AI 모델 선택 가능",   domain:"you.com",       filters:["free"]},
-        {name:"Phind",     url:"https://www.phind.com",     icon:"🧑‍💻",bg:"rgba(5,150,105,.15)",  tag:"개발자", desc:"개발자 특화 AI 검색 엔진. 코드 답변 제공",       domain:"phind.com",     filters:["free"]},
-        {name:"Elicit",    url:"https://elicit.com",        icon:"📚",bg:"rgba(99,102,241,.15)", tag:"리서치", desc:"AI 논문 리서치 도구. 학술 자료 분석 특화",        domain:"elicit.com",    filters:["free"]},
-        {name:"Consensus", url:"https://consensus.app",     icon:"🧬",bg:"rgba(16,185,129,.15)", tag:"학술",   desc:"AI로 과학 논문에서 근거 기반 답변 제공",          domain:"consensus.app", filters:["free"]},
+      "검색/리서치 AI":[
+        {name:"Perplexity", url:"https://www.perplexity.ai",          icon:"🔍",bg:"rgba(32,178,170,.15)", tag:"검색",   desc:"AI 기반 검색 엔진. 출처를 제공하는 실시간 검색",     domain:"perplexity.ai",           filters:["free","api"]},
+        {name:"NotebookLM", url:"https://notebooklm.google.com",      icon:"📓",bg:"rgba(66,133,244,.15)", tag:"Google", desc:"Google의 AI 리서치 노트북. 문서 기반 Q&A·요약",     domain:"notebooklm.google.com",   filters:["free"]},
+        {name:"You.com",    url:"https://you.com",                    icon:"🔎",bg:"rgba(124,58,237,.15)", tag:"검색",   desc:"에이전트 기반 AI 웹 검색. 다양한 AI 모델 선택 가능", domain:"you.com",                 filters:["free"]},
+        {name:"Phind",      url:"https://www.phind.com",              icon:"🧑‍💻",bg:"rgba(5,150,105,.15)",  tag:"개발자", desc:"개발자 특화 AI 검색 엔진. 코드 답변 제공",           domain:"phind.com",               filters:["free"]},
+        {name:"Elicit",     url:"https://elicit.com",                 icon:"📚",bg:"rgba(99,102,241,.15)", tag:"리서치", desc:"AI 논문 리서치 도구. 학술 자료 분석 특화",            domain:"elicit.com",              filters:["free"]},
+        {name:"Consensus",  url:"https://consensus.app",              icon:"🧬",bg:"rgba(16,185,129,.15)", tag:"학술",   desc:"AI로 과학 논문에서 근거 기반 답변 제공",              domain:"consensus.app",           filters:["free"]},
       ],
-      "한국 AI 서비스": [
-        {name:"뤼튼",         url:"https://wrtn.ai",           icon:"🇰🇷",bg:"rgba(239,68,68,.15)",  tag:"국내",   desc:"국내 AI 서비스. Claude·GPT·Gemini 무료 제공",             domain:"wrtn.ai",           filters:["free","ko"]},
-        {name:"클로바X",      url:"https://clova-x.naver.com", icon:"🟢",bg:"rgba(0,199,60,.15)",   tag:"네이버", desc:"네이버의 AI 챗봇 서비스. 한국어 최적화",                   domain:"clova-x.naver.com", filters:["free","ko"]},
-        {name:"HyperCLOVA X",url:"https://www.ncloud.com/product/aiService/hyperClovaX",icon:"🔵",bg:"rgba(0,80,200,.15)",tag:"네이버",desc:"네이버 클라우드 초거대 AI 언어모델", domain:"ncloud.com",        filters:["ko","api"]},
-        {name:"KakaoAI",     url:"https://www.kakaocorp.com/page/service/service/KakaoAI",icon:"💛",bg:"rgba(255,193,7,.15)",tag:"카카오",desc:"카카오의 AI 서비스 포털",          domain:"kakaocorp.com",     filters:["ko"]},
-      ],
-    }
-  },
-  image: {
-    title:"AI 이미지", desc:"AI 기반 이미지 생성 및 편집 서비스",
-    subs: {
-      "이미지 생성": [
-        {name:"Midjourney",       url:"https://www.midjourney.com",           icon:"🎨",bg:"rgba(99,102,241,.15)",  tag:"이미지",   desc:"고품질 AI 이미지 생성. 예술적 스타일로 유명",          domain:"midjourney.com",         filters:[]},
-        {name:"DALL-E 3",         url:"https://openai.com/dall-e-3",          icon:"🖼️",bg:"rgba(16,163,127,.15)",  tag:"OpenAI",   desc:"OpenAI의 이미지 생성 AI. ChatGPT와 통합",              domain:"openai.com",             filters:["api"]},
-        {name:"Stable Diffusion", url:"https://stability.ai",                 icon:"🌀",bg:"rgba(139,92,246,.15)",  tag:"오픈소스", desc:"오픈소스 AI 이미지 생성 모델. 로컬 실행 가능",          domain:"stability.ai",           filters:["oss","api"]},
-        {name:"Leonardo AI",      url:"https://leonardo.ai",                  icon:"🦁",bg:"rgba(245,158,11,.15)",  tag:"이미지",   desc:"게임 에셋 특화 AI 이미지 생성 플랫폼",                  domain:"leonardo.ai",            filters:["free"]},
-        {name:"Ideogram",         url:"https://ideogram.ai",                  icon:"💫",bg:"rgba(236,72,153,.15)",  tag:"이미지",   desc:"텍스트 렌더링 특화 AI 이미지 생성",                     domain:"ideogram.ai",            filters:["free"]},
-        {name:"Adobe Firefly",    url:"https://firefly.adobe.com",            icon:"🔥",bg:"rgba(255,0,0,.1)",      tag:"Adobe",    desc:"Adobe의 AI 이미지 생성. 상업적 사용 안전",              domain:"firefly.adobe.com",      filters:["api"]},
-        {name:"Flux",             url:"https://fal.ai/models/fal-ai/flux",    icon:"⚡",bg:"rgba(99,102,241,.15)",  tag:"이미지",   desc:"Black Forest Labs의 고성능 이미지 생성 모델",            domain:"fal.ai",                 filters:["api","oss"]},
-        {name:"Bing Image Creator",url:"https://www.bing.com/images/create",  icon:"🖌️",bg:"rgba(0,120,212,.15)",  tag:"Microsoft",desc:"Microsoft DALL-E 기반 무료 이미지 생성",                 domain:"bing.com",               filters:["free"]},
-        {name:"Playground AI",    url:"https://playground.com",               icon:"🛝",bg:"rgba(255,107,53,.15)",  tag:"이미지",   desc:"무료 이미지 생성 및 편집. 다양한 모델 제공",             domain:"playground.com",         filters:["free"]},
-        {name:"Krea AI",          url:"https://www.krea.ai",                  icon:"🔮",bg:"rgba(168,85,247,.15)",  tag:"이미지",   desc:"실시간 AI 이미지 생성 및 업스케일링",                   domain:"krea.ai",                filters:["free"]},
-        {name:"Freepik AI",       url:"https://www.freepik.com/ai/image-generator",icon:"🖼️",bg:"rgba(0,196,204,.15)",tag:"무료",desc:"Freepik의 AI 이미지 생성. 무료 크레딧 제공",             domain:"freepik.com",            filters:["free"]},
-        {name:"NightCafe",        url:"https://creator.nightcafe.studio",     icon:"🌙",bg:"rgba(30,30,80,.4)",     tag:"이미지",   desc:"다양한 AI 모델로 아트 생성. 커뮤니티 공유",              domain:"creator.nightcafe.studio",filters:["free"]},
-      ],
-      "이미지 편집/합성": [
-        {name:"Whisk",      url:"https://labs.google/fx/tools/whisk",icon:"🌀",bg:"rgba(66,133,244,.15)",  tag:"Google",  desc:"Google의 이미지 합성 AI. 이미지로 새 이미지 생성", domain:"labs.google",   filters:["free"]},
-        {name:"Remove.bg",  url:"https://www.remove.bg",             icon:"✂️",bg:"rgba(0,180,216,.15)",   tag:"편집",    desc:"AI 배경 자동 제거 서비스. 원클릭 투명 배경",       domain:"remove.bg",     filters:["free"]},
-        {name:"Canva",      url:"https://www.canva.com",             icon:"🎭",bg:"rgba(0,196,204,.15)",   tag:"디자인",  desc:"디자인 플랫폼 + AI 이미지 생성 통합",             domain:"canva.com",     filters:["free","ko"]},
-        {name:"Clipdrop",   url:"https://clipdrop.co",               icon:"📸",bg:"rgba(168,85,247,.15)",  tag:"편집",    desc:"Stability AI의 이미지 편집 도구 모음",             domain:"clipdrop.co",   filters:["free"]},
-        {name:"Magnific AI",url:"https://magnific.ai",               icon:"🔍",bg:"rgba(250,204,21,.15)",  tag:"업스케일",desc:"AI 이미지 업스케일러. 해상도·디테일 향상",          domain:"magnific.ai",   filters:[]},
-        {name:"PhotoRoom",  url:"https://www.photoroom.com",         icon:"📷",bg:"rgba(99,102,241,.15)",  tag:"편집",    desc:"AI 배경 제거·교체. 제품 사진 편집 특화",           domain:"photoroom.com", filters:["free"]},
+      "한국 AI 서비스":[
+        {name:"뤼튼",         url:"https://wrtn.ai",            icon:"🇰🇷",bg:"rgba(239,68,68,.15)",  tag:"국내",   desc:"국내 AI 서비스. Claude·GPT·Gemini 무료 제공",      domain:"wrtn.ai",           filters:["free","ko"]},
+        {name:"클로바X",      url:"https://clova-x.naver.com",  icon:"🟢",bg:"rgba(0,199,60,.15)",   tag:"네이버", desc:"네이버의 AI 챗봇 서비스. 한국어 최적화",            domain:"clova-x.naver.com", filters:["free","ko"]},
+        {name:"HyperCLOVA X",url:"https://clova-x.naver.com",  icon:"🔵",bg:"rgba(0,80,200,.15)",   tag:"네이버", desc:"네이버 한국어 특화 초거대 AI 언어모델",             domain:"ncloud.com",        filters:["ko","api"]},
+        {name:"KakaoAI",     url:"https://www.kakaocorp.com/page/service/service/KakaoAI",icon:"💛",bg:"rgba(255,193,7,.15)",tag:"카카오",desc:"카카오의 AI 서비스 포털", domain:"kakaocorp.com",     filters:["ko"]},
       ],
     }
   },
-  media: {
-    title:"AI 영상/음악", desc:"AI 기반 영상, 음악, 음성 생성 서비스",
-    subs: {
-      "영상 생성": [
-        {name:"Runway ML", url:"https://runwayml.com",     icon:"🎬",bg:"rgba(0,255,135,.08)",  tag:"영상",   desc:"AI 영상 생성·편집 플랫폼의 선두주자. Gen-3",domain:"runwayml.com",  filters:["free"]},
-        {name:"Pika",      url:"https://pika.art",         icon:"🎥",bg:"rgba(168,85,247,.15)", tag:"영상",   desc:"텍스트·이미지로 영상 생성하는 AI 플랫폼",   domain:"pika.art",      filters:["free"]},
-        {name:"Kling AI",  url:"https://klingai.com",      icon:"🎞️",bg:"rgba(244,63,94,.15)",  tag:"영상",   desc:"Kuaishou의 고품질 AI 영상 생성 서비스",      domain:"klingai.com",   filters:["free"]},
-        {name:"Sora",      url:"https://sora.com",         icon:"☁️",bg:"rgba(14,165,233,.15)", tag:"OpenAI", desc:"OpenAI의 AI 영상 생성 모델. 고해상도 영상",  domain:"sora.com",      filters:[]},
-        {name:"HeyGen",    url:"https://www.heygen.com",   icon:"👤",bg:"rgba(139,92,246,.15)", tag:"아바타", desc:"AI 아바타 영상 생성. 마케팅·교육·번역용",    domain:"heygen.com",    filters:["free"]},
-        {name:"Luma AI",   url:"https://lumalabs.ai",      icon:"🌟",bg:"rgba(99,102,241,.15)", tag:"영상",   desc:"Dream Machine — 고품질 AI 영상 생성",        domain:"lumalabs.ai",   filters:["free"]},
-        {name:"Synthesia", url:"https://www.synthesia.io", icon:"🎤",bg:"rgba(16,185,129,.15)", tag:"아바타", desc:"AI 아바타로 교육·마케팅 영상 자동 생성",      domain:"synthesia.io",  filters:[]},
-        {name:"Invideo AI",url:"https://invideo.io",       icon:"📹",bg:"rgba(245,158,11,.15)", tag:"영상",   desc:"텍스트 프롬프트로 완성된 영상 자동 생성",     domain:"invideo.io",    filters:["free"]},
-        {name:"Descript",  url:"https://www.descript.com", icon:"✂️",bg:"rgba(99,102,241,.15)", tag:"편집",   desc:"텍스트로 영상 편집. AI 음성 교체·제거",       domain:"descript.com",  filters:["free"]},
+  creative:{
+    title:"AI 크리에이티브", desc:"이미지·영상·음악·앱 빌더 AI 도구",
+    subs:{
+      "이미지 생성":[
+        {name:"Midjourney",       url:"https://www.midjourney.com",          icon:"🎨",bg:"rgba(99,102,241,.15)",  tag:"이미지",  desc:"최고 품질의 AI 아트 생성 도구",            domain:"midjourney.com",         filters:[]},
+        {name:"DALL-E 3",         url:"https://openai.com/dall-e-3",         icon:"🖼️",bg:"rgba(16,163,127,.15)",  tag:"OpenAI",  desc:"OpenAI의 텍스트→이미지 변환 AI",           domain:"openai.com",             filters:["api"]},
+        {name:"Stable Diffusion", url:"https://stability.ai",                icon:"🌀",bg:"rgba(139,92,246,.15)",  tag:"오픈소스",desc:"Stable Diffusion 오픈소스 개발사",          domain:"stability.ai",           filters:["oss","api"]},
+        {name:"Leonardo AI",      url:"https://leonardo.ai",                 icon:"🦁",bg:"rgba(245,158,11,.15)",  tag:"이미지",  desc:"고품질 AI 아트 & 게임 에셋 생성",          domain:"leonardo.ai",            filters:["free"]},
+        {name:"Ideogram",         url:"https://ideogram.ai",                 icon:"💫",bg:"rgba(236,72,153,.15)",  tag:"이미지",  desc:"텍스트 렌더링이 강한 이미지 AI",           domain:"ideogram.ai",            filters:["free"]},
+        {name:"Adobe Firefly",    url:"https://firefly.adobe.com",           icon:"🔥",bg:"rgba(255,0,0,.1)",      tag:"Adobe",   desc:"Adobe 생태계 생성형 AI 도구. 상업적 사용 안전", domain:"firefly.adobe.com",   filters:["api"]},
+        {name:"Flux",             url:"https://fal.ai/models/fal-ai/flux",   icon:"⚡",bg:"rgba(99,102,241,.15)",  tag:"이미지",  desc:"Black Forest Labs 오픈소스 최강 이미지 모델",domain:"fal.ai",              filters:["api","oss"]},
+        {name:"Bing Image Creator",url:"https://www.bing.com/images/create", icon:"🖌️",bg:"rgba(0,120,212,.15)",  tag:"Microsoft",desc:"Microsoft DALL-E 기반 무료 이미지 생성",   domain:"bing.com",               filters:["free"]},
+        {name:"Playground AI",    url:"https://playground.com",              icon:"🛝",bg:"rgba(255,107,53,.15)",  tag:"이미지",  desc:"무료 이미지 생성 및 편집. 다양한 모델",    domain:"playground.com",         filters:["free"]},
+        {name:"Krea AI",          url:"https://www.krea.ai",                 icon:"🔮",bg:"rgba(168,85,247,.15)",  tag:"이미지",  desc:"실시간 AI 이미지 생성 및 업스케일링",      domain:"krea.ai",                filters:["free"]},
+        {name:"Freepik AI",       url:"https://www.freepik.com/ai",          icon:"🖼️",bg:"rgba(0,196,204,.15)",  tag:"무료",    desc:"스톡 + AI 이미지 생성 올인원 플랫폼",      domain:"freepik.com",            filters:["free"]},
+        {name:"Whisk",            url:"https://labs.google/fx/tools/whisk",  icon:"🌀",bg:"rgba(66,133,244,.15)",  tag:"Google",  desc:"Google Labs의 이미지 리믹스 AI",           domain:"labs.google",            filters:["free"]},
       ],
-      "음악 생성": [
-        {name:"SUNO",    url:"https://suno.com",      icon:"🎵",bg:"rgba(245,158,11,.15)", tag:"음악",desc:"텍스트로 음악 생성. 가사+보컬+멜로디 완성", domain:"suno.com",    filters:["free"]},
-        {name:"Udio",    url:"https://www.udio.com",  icon:"🎶",bg:"rgba(16,185,129,.15)", tag:"음악",desc:"고품질 AI 음악 생성 플랫폼",                domain:"udio.com",    filters:["free"]},
-        {name:"Mubert",  url:"https://mubert.com",    icon:"🎸",bg:"rgba(99,102,241,.15)", tag:"음악",desc:"AI 생성 로열티 프리 음악 스트리밍",          domain:"mubert.com",  filters:["free"]},
-        {name:"Soundraw",url:"https://soundraw.io",   icon:"🎼",bg:"rgba(244,63,94,.15)",  tag:"음악",desc:"기분·장르 선택으로 BGM 자동 생성",           domain:"soundraw.io", filters:["free"]},
-        {name:"Boomy",   url:"https://boomy.com",     icon:"🥁",bg:"rgba(139,92,246,.15)", tag:"음악",desc:"AI로 30초 만에 음악 생성·스트리밍 배포",     domain:"boomy.com",   filters:["free"]},
+      "이미지 편집":[
+        {name:"Canva",      url:"https://www.canva.com",       icon:"🎭",bg:"rgba(0,196,204,.15)",  tag:"디자인",  desc:"AI 내장 비주얼 디자인 플랫폼",                   domain:"canva.com",     filters:["free","ko"]},
+        {name:"Remove.bg",  url:"https://www.remove.bg",       icon:"✂️",bg:"rgba(0,180,216,.15)",  tag:"편집",    desc:"AI 배경 자동 제거 전문 도구",                    domain:"remove.bg",     filters:["free"]},
+        {name:"Clipdrop",   url:"https://clipdrop.co",         icon:"📸",bg:"rgba(168,85,247,.15)", tag:"편집",    desc:"Stability AI의 이미지 편집 도구 모음",            domain:"clipdrop.co",   filters:["free"]},
+        {name:"Magnific AI",url:"https://magnific.ai",         icon:"🔍",bg:"rgba(250,204,21,.15)", tag:"업스케일",desc:"AI 이미지 업스케일러. 해상도·디테일 향상",         domain:"magnific.ai",   filters:[]},
+        {name:"PhotoRoom",  url:"https://www.photoroom.com",   icon:"📷",bg:"rgba(99,102,241,.15)", tag:"편집",    desc:"AI 배경 제거·교체. 제품 사진 편집 특화",          domain:"photoroom.com", filters:["free"]},
       ],
-      "음성 합성": [
-        {name:"ElevenLabs",     url:"https://elevenlabs.io",      icon:"🎙️",bg:"rgba(255,107,53,.15)", tag:"음성",desc:"최고 품질의 AI 음성 합성 및 음성 클로닝", domain:"elevenlabs.io",     filters:["free","api"]},
-        {name:"Replica Studios",url:"https://replicastudios.com", icon:"🔊",bg:"rgba(59,130,246,.15)",  tag:"음성",desc:"게임·미디어용 AI 음성 생성 서비스",       domain:"replicastudios.com",filters:[]},
-        {name:"Typecast",       url:"https://typecast.ai",        icon:"🗣️",bg:"rgba(168,85,247,.15)",  tag:"국내",desc:"국내 AI 성우 서비스. 다양한 목소리 제공", domain:"typecast.ai",       filters:["free","ko"]},
+      "영상 생성":[
+        {name:"Runway ML", url:"https://runwayml.com",     icon:"🎬",bg:"rgba(0,255,135,.08)", tag:"영상",   desc:"AI 비디오 생성 & 편집 전문 도구. Gen-3",    domain:"runwayml.com",  filters:["free"]},
+        {name:"Sora",      url:"https://sora.com",         icon:"☁️",bg:"rgba(14,165,233,.15)",tag:"OpenAI", desc:"OpenAI의 텍스트→비디오 생성 AI",             domain:"sora.com",      filters:[]},
+        {name:"Pika",      url:"https://pika.art",         icon:"🎥",bg:"rgba(168,85,247,.15)",tag:"영상",   desc:"빠른 AI 쇼트폼 비디오 생성기",               domain:"pika.art",      filters:["free"]},
+        {name:"Kling AI",  url:"https://klingai.com",      icon:"🎞️",bg:"rgba(244,63,94,.15)", tag:"영상",   desc:"쾌이쇼우의 고품질 AI 영상 도구",             domain:"klingai.com",   filters:["free"]},
+        {name:"HeyGen",    url:"https://www.heygen.com",   icon:"👤",bg:"rgba(139,92,246,.15)",tag:"아바타", desc:"AI 아바타 & 다국어 비디오 제작",             domain:"heygen.com",    filters:["free"]},
+        {name:"Luma AI",   url:"https://lumalabs.ai",      icon:"🌟",bg:"rgba(99,102,241,.15)",tag:"영상",   desc:"Dream Machine — AI 영상·3D 에셋 생성",       domain:"lumalabs.ai",   filters:["free"]},
+        {name:"Synthesia", url:"https://www.synthesia.io", icon:"🎤",bg:"rgba(16,185,129,.15)",tag:"아바타", desc:"AI 아바타로 다국어 기업 영상 제작",           domain:"synthesia.io",  filters:[]},
+        {name:"Descript",  url:"https://www.descript.com", icon:"✂️",bg:"rgba(99,102,241,.15)",tag:"편집",   desc:"스크립트 편집으로 영상·팟캐스트 편집",        domain:"descript.com",  filters:["free"]},
+        {name:"Invideo AI",url:"https://invideo.io",       icon:"📹",bg:"rgba(245,158,11,.15)",tag:"영상",   desc:"텍스트 프롬프트로 완성된 영상 자동 생성",     domain:"invideo.io",    filters:["free"]},
       ],
-    }
-  },
-  coding: {
-    title:"AI 코딩", desc:"AI 기반 코딩 어시스턴트 및 앱 빌더 서비스",
-    subs: {
-      "코딩 어시스턴트": [
-        {name:"GitHub Copilot",url:"https://github.com/features/copilot",icon:"🤖",bg:"rgba(110,64,201,.15)",tag:"GitHub",  desc:"GitHub & OpenAI의 AI 코딩 도우미. IDE 통합", domain:"github.com",     filters:["ko"]},
-        {name:"Cursor",        url:"https://cursor.sh",                  icon:"📝",bg:"rgba(0,166,237,.15)", tag:"에디터",  desc:"AI 내장 코드 에디터. Claude·GPT 멀티 모델",  domain:"cursor.sh",      filters:["free"]},
-        {name:"Windsurf",      url:"https://codeium.com/windsurf",       icon:"🏄",bg:"rgba(6,182,212,.15)", tag:"에디터",  desc:"Codeium의 AI 코딩 에디터. 무료 플랜 제공",   domain:"codeium.com",    filters:["free"]},
-        {name:"Replit",        url:"https://replit.com",                 icon:"💻",bg:"rgba(242,98,7,.15)",  tag:"IDE",     desc:"브라우저 기반 코딩 환경 + AI 도우미",        domain:"replit.com",     filters:["free"]},
-        {name:"Tabnine",       url:"https://www.tabnine.com",            icon:"⌨️",bg:"rgba(99,102,241,.15)",tag:"자동완성",desc:"AI 코드 자동완성 플러그인. 프라이버시 중심",  domain:"tabnine.com",    filters:["free"]},
-        {name:"Amazon Q",      url:"https://aws.amazon.com/q/developer/",icon:"☁️",bg:"rgba(255,153,0,.15)", tag:"AWS",     desc:"Amazon의 AI 코딩 어시스턴트. AWS 연동 강점", domain:"aws.amazon.com", filters:["free"]},
-        {name:"Codeium",       url:"https://codeium.com",                icon:"🟢",bg:"rgba(34,197,94,.15)", tag:"무료",    desc:"무료 AI 코드 자동완성. 70+ 언어 지원",        domain:"codeium.com",    filters:["free"]},
-        {name:"Aider",         url:"https://aider.chat",                 icon:"🤝",bg:"rgba(168,85,247,.15)",tag:"터미널",  desc:"터미널 기반 AI 페어 프로그래밍 도구",         domain:"aider.chat",     filters:["free","oss"]},
+      "음악/음성 생성":[
+        {name:"SUNO",           url:"https://suno.com",           icon:"🎵",bg:"rgba(245,158,11,.15)", tag:"음악", desc:"텍스트 한 줄로 완성하는 AI 작곡",         domain:"suno.com",          filters:["free"]},
+        {name:"Udio",           url:"https://www.udio.com",       icon:"🎶",bg:"rgba(16,185,129,.15)", tag:"음악", desc:"고품질 AI 음악 & 가사 생성기",             domain:"udio.com",          filters:["free"]},
+        {name:"ElevenLabs",     url:"https://elevenlabs.io",      icon:"🎙️",bg:"rgba(255,107,53,.15)", tag:"음성", desc:"AI 음성 합성·클로닝 최강 플랫폼",          domain:"elevenlabs.io",     filters:["free","api"]},
+        {name:"Mubert",         url:"https://mubert.com",         icon:"🎸",bg:"rgba(99,102,241,.15)", tag:"음악", desc:"AI 생성 로열티 프리 배경음악",             domain:"mubert.com",        filters:["free"]},
+        {name:"Soundraw",       url:"https://soundraw.io",        icon:"🎼",bg:"rgba(244,63,94,.15)",  tag:"음악", desc:"기분·장르 선택으로 BGM 자동 생성",         domain:"soundraw.io",       filters:["free"]},
+        {name:"Boomy",          url:"https://boomy.com",          icon:"🥁",bg:"rgba(139,92,246,.15)", tag:"음악", desc:"AI로 30초 만에 음악 생성·스트리밍 배포",   domain:"boomy.com",         filters:["free"]},
+        {name:"Typecast",       url:"https://typecast.ai",        icon:"🗣️",bg:"rgba(168,85,247,.15)", tag:"국내", desc:"국내 AI 성우 서비스. 다양한 목소리 제공", domain:"typecast.ai",       filters:["free","ko"]},
+        {name:"Replica Studios",url:"https://replicastudios.com", icon:"🔊",bg:"rgba(59,130,246,.15)",  tag:"음성", desc:"게임·미디어용 AI 음성 생성 서비스",        domain:"replicastudios.com",filters:[]},
       ],
-      "AI 앱 빌더": [
-        {name:"Google AI Studio",url:"https://aistudio.google.com", icon:"🧪",bg:"rgba(66,133,244,.15)",  tag:"Google",  desc:"Google의 AI 개발 플레이그라운드. Gemini API 테스트·프로토타이핑", domain:"aistudio.google.com",filters:["free","api"]},
-        {name:"Lovable",         url:"https://lovable.dev",          icon:"💜",bg:"rgba(147,51,234,.15)", tag:"앱빌더",  desc:"AI로 풀스택 웹앱 생성. 디자인부터 배포까지",                    domain:"lovable.dev",        filters:["free"]},
-        {name:"V0",              url:"https://v0.dev",               icon:"▲", bg:"rgba(200,200,200,.08)",tag:"Vercel",  desc:"Vercel의 AI UI 컴포넌트 생성기. React/Tailwind",                 domain:"v0.dev",             filters:["free"]},
-        {name:"Bolt.new",        url:"https://bolt.new",             icon:"⚡",bg:"rgba(245,158,11,.15)", tag:"앱빌더",  desc:"StackBlitz의 AI 풀스택 앱 빌더. 즉시 배포",                     domain:"bolt.new",           filters:["free"]},
-        {name:"Tempo",           url:"https://www.tempo.new",        icon:"🎯",bg:"rgba(225,29,72,.15)",  tag:"앱빌더",  desc:"React 앱을 위한 AI 비주얼 에디터",                               domain:"tempo.new",          filters:["free"]},
-        {name:"Dora AI",         url:"https://www.dora.run",         icon:"🎨",bg:"rgba(99,102,241,.15)", tag:"노코드",  desc:"AI 노코드 웹사이트 빌더. 3D 효과 지원",                          domain:"dora.run",           filters:["free"]},
-        {name:"Vercel",          url:"https://vercel.com",           icon:"▲", bg:"rgba(200,200,200,.08)",tag:"배포",    desc:"프론트엔드 배포 플랫폼. AI 앱 원클릭 배포",                      domain:"vercel.com",         filters:["free"]},
-        {name:"Supabase",        url:"https://supabase.com",         icon:"🟩",bg:"rgba(62,207,142,.15)", tag:"DB",      desc:"오픈소스 Firebase 대안. AI 앱 백엔드 구축",                      domain:"supabase.com",       filters:["free","oss","api"]},
-      ],
-    }
-  },
-  design: {
-    title:"AI 디자인", desc:"AI 기반 UI/UX·그래픽·웹 디자인 도구 모음",
-    subs: {
-      "UI/UX 디자인": [
-        {name:"Figma",     url:"https://www.figma.com",     icon:"🎨",bg:"rgba(162,89,255,.15)", tag:"UI/UX",   desc:"협업 디자인 툴의 표준. AI 기능·플러그인 생태계",    domain:"figma.com",     filters:["free","ko"]},
-        {name:"Uizard",    url:"https://uizard.io",         icon:"📱",bg:"rgba(99,102,241,.15)", tag:"UI/UX",   desc:"스케치·텍스트로 앱 목업 자동 생성",                 domain:"uizard.io",     filters:["free"]},
-        {name:"Galileo AI",url:"https://www.usegalileo.ai", icon:"🔭",bg:"rgba(245,158,11,.15)", tag:"UI/UX",   desc:"텍스트 프롬프트로 UI 디자인 즉시 생성",             domain:"usegalileo.ai", filters:["free"]},
-        {name:"Visily",    url:"https://www.visily.ai",     icon:"👁️",bg:"rgba(16,185,129,.15)", tag:"UI/UX",   desc:"스크린샷·템플릿으로 와이어프레임 자동 생성",         domain:"visily.ai",     filters:["free"]},
-        {name:"Framer",    url:"https://www.framer.com",    icon:"⚡",bg:"rgba(0,200,255,.15)",  tag:"웹디자인",desc:"AI 웹사이트 생성 + 프로토타이핑 + 퍼블리싱 통합",    domain:"framer.com",    filters:["free"]},
-        {name:"Penpot",    url:"https://penpot.app",        icon:"✏️",bg:"rgba(99,102,241,.15)", tag:"오픈소스",desc:"오픈소스 디자인·프로토타이핑 툴. Figma 대안",         domain:"penpot.app",    filters:["free","oss"]},
-      ],
-      "웹 디자인": [
-        {name:"Webflow",     url:"https://webflow.com",       icon:"🌊",bg:"rgba(73,141,255,.15)", tag:"노코드",  desc:"노코드 웹 디자인·CMS·호스팅 올인원 플랫폼",  domain:"webflow.com",    filters:["free"]},
-        {name:"Wix AI",      url:"https://www.wix.com",       icon:"⬛",bg:"rgba(0,0,0,.3)",       tag:"노코드",  desc:"AI 웹사이트 빌더. 텍스트만으로 사이트 생성", domain:"wix.com",        filters:["free","ko"]},
-        {name:"Relume",      url:"https://www.relume.io",     icon:"🧱",bg:"rgba(99,102,241,.15)", tag:"컴포넌트",desc:"AI로 사이트맵·와이어프레임·컴포넌트 자동 생성",domain:"relume.io",     filters:[]},
-        {name:"Durable",     url:"https://durable.co",        icon:"🏗️",bg:"rgba(245,158,11,.15)", tag:"웹빌더",  desc:"30초 만에 AI가 비즈니스 웹사이트 자동 생성", domain:"durable.co",     filters:["free"]},
-        {name:"Hostinger AI",url:"https://www.hostinger.com/ai-website-builder",icon:"🌐",bg:"rgba(6,182,212,.15)",tag:"웹빌더",desc:"AI 웹사이트 빌더 + 호스팅 통합 서비스",domain:"hostinger.com",filters:[]},
-      ],
-      "로고/브랜딩": [
-        {name:"Looka",          url:"https://looka.com",                    icon:"🦅",bg:"rgba(99,102,241,.15)", tag:"로고",  desc:"AI 로고 생성기. 브랜드 아이덴티티 패키지 제공",domain:"looka.com",      filters:["free"]},
-        {name:"Brandmark",      url:"https://brandmark.io",                 icon:"🔖",bg:"rgba(244,63,94,.15)",  tag:"로고",  desc:"AI 로고·브랜드 디자인 자동 생성",              domain:"brandmark.io",   filters:[]},
-        {name:"Designs.ai",     url:"https://designs.ai",                   icon:"🎯",bg:"rgba(168,85,247,.15)", tag:"브랜딩",desc:"로고·영상·카피 등 브랜딩 올인원 AI 플랫폼",   domain:"designs.ai",     filters:[]},
-        {name:"Namecheap Logo", url:"https://www.namecheap.com/logo-maker/",icon:"🏷️",bg:"rgba(255,102,0,.15)",  tag:"로고",  desc:"무료 AI 로고 메이커. 다운로드 즉시 가능",      domain:"namecheap.com",  filters:["free"]},
-      ],
-      "디자인→코드": [
-        {name:"Locofy",    url:"https://www.locofy.ai",   icon:"🚂",bg:"rgba(99,102,241,.15)",  tag:"D2C",  desc:"Figma·Adobe XD 디자인을 React·Next.js 코드로 변환",domain:"locofy.ai",   filters:["free"]},
-        {name:"Anima",     url:"https://www.animaapp.com",icon:"🎬",bg:"rgba(245,158,11,.15)",  tag:"D2C",  desc:"Figma 플러그인으로 디자인을 HTML/React로 변환",     domain:"animaapp.com",filters:["free"]},
-        {name:"DhiWise",   url:"https://www.dhiwise.com", icon:"⚙️",bg:"rgba(16,185,129,.15)",  tag:"D2C",  desc:"Figma 디자인에서 Flutter·React 코드 자동 생성",      domain:"dhiwise.com", filters:["free"]},
-        {name:"Builder.io",url:"https://www.builder.io",  icon:"🧱",bg:"rgba(6,182,212,.15)",   tag:"비주얼",desc:"비주얼 에디터로 React·Vue·Angular 컴포넌트 생성",   domain:"builder.io",  filters:["free"]},
+      "웹/앱 빌더":[
+        {name:"Lovable",  url:"https://lovable.dev",   icon:"💜",bg:"rgba(147,51,234,.15)", tag:"앱빌더", desc:"AI로 풀스택 앱을 자동 빌드",                             domain:"lovable.dev",    filters:["free"]},
+        {name:"V0",       url:"https://v0.dev",         icon:"▲", bg:"rgba(200,200,200,.08)",tag:"Vercel",  desc:"Vercel의 AI UI 컴포넌트 생성기. React/Tailwind",          domain:"v0.dev",         filters:["free"]},
+        {name:"Bolt.new", url:"https://bolt.new",       icon:"⚡",bg:"rgba(245,158,11,.15)", tag:"앱빌더", desc:"StackBlitz의 AI 웹 프로젝트 빌더. 즉시 배포",             domain:"bolt.new",       filters:["free"]},
+        {name:"Framer",   url:"https://www.framer.com", icon:"🏄",bg:"rgba(0,200,255,.15)",  tag:"웹빌더", desc:"AI 기반 노코드 웹사이트 빌더 + 프로토타이핑",             domain:"framer.com",     filters:["free"]},
+        {name:"Gamma",    url:"https://gamma.app",      icon:"⚡",bg:"rgba(124,58,237,.15)", tag:"PPT",     desc:"텍스트 입력만으로 프레젠테이션·문서 자동 생성",           domain:"gamma.app",      filters:["free"]},
+        {name:"Webflow",  url:"https://webflow.com",    icon:"🌊",bg:"rgba(73,141,255,.15)", tag:"노코드",  desc:"노코드 웹 디자인·CMS·호스팅 올인원 플랫폼",               domain:"webflow.com",    filters:["free"]},
+        {name:"Dora AI",  url:"https://www.dora.run",   icon:"🎨",bg:"rgba(99,102,241,.15)", tag:"노코드",  desc:"AI 노코드 웹사이트 빌더. 3D 효과 지원",                  domain:"dora.run",       filters:["free"]},
+        {name:"Durable",  url:"https://durable.co",     icon:"🏗️",bg:"rgba(245,158,11,.15)", tag:"웹빌더",  desc:"30초 만에 AI가 비즈니스 웹사이트 자동 생성",             domain:"durable.co",     filters:["free"]},
       ],
     }
   },
-  productivity: {
-    title:"AI 생산성", desc:"AI로 업무 효율을 높이는 생산성 도구 모음",
-    subs: {
-      "프레젠테이션/문서": [
-        {name:"Gamma",      url:"https://gamma.app",          icon:"⚡",bg:"rgba(124,58,237,.15)", tag:"PPT",  desc:"텍스트만으로 AI가 슬라이드·문서·웹페이지 자동 생성",domain:"gamma.app",     filters:["free"]},
-        {name:"Tome",       url:"https://tome.app",           icon:"📖",bg:"rgba(245,158,11,.15)", tag:"PPT",  desc:"AI 스토리텔링 프레젠테이션 도구",                    domain:"tome.app",      filters:["free"]},
-        {name:"Beautiful.ai",url:"https://www.beautiful.ai",  icon:"🎨",bg:"rgba(99,102,241,.15)", tag:"PPT",  desc:"AI가 자동으로 디자인하는 프레젠테이션 도구",          domain:"beautiful.ai",  filters:[]},
-        {name:"SlidesAI",   url:"https://www.slidesai.io",    icon:"📊",bg:"rgba(66,133,244,.15)", tag:"PPT",  desc:"Google Slides AI 자동 생성 확장 프로그램",            domain:"slidesai.io",   filters:["free"]},
-        {name:"Notion AI",  url:"https://www.notion.so",      icon:"📝",bg:"rgba(200,200,200,.08)",tag:"문서", desc:"올인원 협업 툴 + AI 작성·요약·번역 기능",            domain:"notion.so",     filters:["free","ko"]},
-        {name:"Obsidian",   url:"https://obsidian.md",        icon:"💎",bg:"rgba(124,58,237,.15)", tag:"노트", desc:"로컬 마크다운 노트. AI 플러그인 생태계",              domain:"obsidian.md",   filters:["free"]},
+  devtools:{
+    title:"개발 도구", desc:"AI 코딩·API·모델·클라우드 개발 도구",
+    subs:{
+      "AI 코딩 도구":[
+        {name:"Cursor",         url:"https://cursor.sh",                   icon:"📝",bg:"rgba(0,166,237,.15)",  tag:"에디터",  desc:"AI 네이티브 코드 에디터. Claude·GPT 멀티 모델", domain:"cursor.sh",      filters:["free"]},
+        {name:"GitHub Copilot", url:"https://github.com/features/copilot", icon:"🤖",bg:"rgba(110,64,201,.15)", tag:"GitHub",  desc:"GitHub × OpenAI 코딩 AI 도우미. IDE 통합",      domain:"github.com",     filters:["ko"]},
+        {name:"Windsurf",       url:"https://windsurf.ai",                 icon:"🏄",bg:"rgba(6,182,212,.15)",  tag:"에디터",  desc:"Codeium의 AI 에이전트 IDE. 무료 플랜 제공",     domain:"windsurf.ai",    filters:["free"]},
+        {name:"Replit",         url:"https://replit.com",                  icon:"💻",bg:"rgba(242,98,7,.15)",   tag:"IDE",     desc:"AI 지원 브라우저 기반 코딩 환경",               domain:"replit.com",     filters:["free"]},
+        {name:"Codeium",        url:"https://codeium.com",                 icon:"🟢",bg:"rgba(34,197,94,.15)",  tag:"무료",    desc:"무료 AI 코드 자동완성 도구. 70+ 언어 지원",     domain:"codeium.com",    filters:["free"]},
+        {name:"Tabnine",        url:"https://www.tabnine.com",             icon:"⌨️",bg:"rgba(99,102,241,.15)", tag:"자동완성",desc:"프라이버시 우선 AI 코드 보조",                  domain:"tabnine.com",    filters:["free"]},
+        {name:"Amazon Q",       url:"https://aws.amazon.com/q/developer/", icon:"☁️",bg:"rgba(255,153,0,.15)",  tag:"AWS",     desc:"Amazon의 AI 코딩 어시스턴트. AWS 연동 강점",    domain:"aws.amazon.com", filters:["free"]},
+        {name:"Aider",          url:"https://aider.chat",                  icon:"🤝",bg:"rgba(168,85,247,.15)", tag:"터미널",  desc:"터미널 기반 AI 페어 프로그래밍 도구",           domain:"aider.chat",     filters:["free","oss"]},
       ],
-      "AI 글쓰기": [
-        {name:"Jasper AI",  url:"https://www.jasper.ai",    icon:"✍️",bg:"rgba(245,158,11,.15)", tag:"카피",  desc:"마케팅·광고 카피 특화 AI 글쓰기 도구",     domain:"jasper.ai",    filters:[]},
-        {name:"Copy.ai",    url:"https://www.copy.ai",      icon:"📋",bg:"rgba(99,102,241,.15)", tag:"카피",  desc:"광고 카피·블로그·이메일 자동 작성",         domain:"copy.ai",      filters:["free"]},
-        {name:"Writesonic", url:"https://writesonic.com",   icon:"🖊️",bg:"rgba(16,185,129,.15)", tag:"블로그",desc:"SEO 최적화 블로그·광고 문구 AI 생성",       domain:"writesonic.com",filters:["free"]},
-        {name:"Grammarly",  url:"https://www.grammarly.com",icon:"✅",bg:"rgba(67,160,71,.15)",  tag:"교정",  desc:"AI 문법 교정·스타일 개선. 영어 글쓰기 필수",domain:"grammarly.com",filters:["free"]},
-        {name:"QuillBot",   url:"https://quillbot.com",     icon:"🦜",bg:"rgba(34,197,94,.15)",  tag:"교정",  desc:"AI 패러프레이징·요약·문법 교정 도구",       domain:"quillbot.com", filters:["free"]},
-        {name:"DeepL",      url:"https://www.deepl.com",    icon:"🌍",bg:"rgba(0,100,200,.15)",  tag:"번역",  desc:"AI 기반 고품질 번역 서비스. 자연스러운 번역",domain:"deepl.com",    filters:["free","ko"]},
+      "API & 클라우드":[
+        {name:"Anthropic Console",url:"https://console.anthropic.com",  icon:"🤖",bg:"rgba(180,83,9,.15)",   tag:"Anthropic",desc:"Claude API 키 관리 & 사용량 콘솔",              domain:"console.anthropic.com", filters:["api"]},
+        {name:"OpenAI Platform",  url:"https://platform.openai.com",    icon:"💡",bg:"rgba(16,163,127,.15)", tag:"OpenAI",   desc:"GPT API & 플레이그라운드",                      domain:"platform.openai.com",   filters:["api"]},
+        {name:"Google AI Studio", url:"https://aistudio.google.com",    icon:"🧪",bg:"rgba(66,133,244,.15)", tag:"Google",   desc:"Gemini API 개발 & 테스트 환경",                 domain:"aistudio.google.com",   filters:["free","api"]},
+        {name:"Groq Cloud",       url:"https://console.groq.com",       icon:"⚡",bg:"rgba(244,63,94,.15)",  tag:"Groq",     desc:"초고속 LLM 추론 클라우드. LPU 기반",            domain:"console.groq.com",      filters:["free","api"]},
+        {name:"Fireworks AI",     url:"https://fireworks.ai",           icon:"🎆",bg:"rgba(245,158,11,.15)", tag:"API",      desc:"고성능 오픈소스 LLM API 제공 플랫폼",           domain:"fireworks.ai",          filters:["api"]},
+        {name:"OpenRouter",       url:"https://openrouter.ai",          icon:"🔀",bg:"rgba(14,165,233,.15)", tag:"API",      desc:"다양한 AI 모델을 단일 API로 통합 제공",          domain:"openrouter.ai",         filters:["free","api"]},
+        {name:"Together AI",      url:"https://www.together.ai",        icon:"🔧",bg:"rgba(99,102,241,.15)", tag:"API",      desc:"오픈소스 LLM 고속 클라우드 플랫폼",             domain:"together.ai",           filters:["free","api"]},
+        {name:"Replicate",        url:"https://replicate.com",          icon:"♻️",bg:"rgba(124,58,237,.15)", tag:"API",      desc:"클라우드로 AI 모델 실행 API",                   domain:"replicate.com",         filters:["api"]},
       ],
-      "업무 자동화": [
-        {name:"Zapier AI",url:"https://zapier.com",      icon:"⚡",bg:"rgba(255,102,0,.15)",  tag:"자동화",  desc:"앱 간 워크플로우 자동화. AI로 봇 생성",          domain:"zapier.com",  filters:["free"]},
-        {name:"Make",     url:"https://www.make.com",    icon:"🔄",bg:"rgba(124,58,237,.15)", tag:"자동화",  desc:"노코드 자동화 플랫폼. 복잡한 워크플로우 구성",    domain:"make.com",    filters:["free"]},
-        {name:"n8n",      url:"https://n8n.io",          icon:"⚙️",bg:"rgba(234,88,12,.15)",  tag:"오픈소스",desc:"오픈소스 워크플로우 자동화. 셀프호스팅 가능",      domain:"n8n.io",      filters:["free","oss"]},
-        {name:"Dify",     url:"https://dify.ai",         icon:"🧩",bg:"rgba(99,102,241,.15)", tag:"LLM앱",   desc:"LLM 앱 개발 플랫폼. 노코드 AI 워크플로우",        domain:"dify.ai",     filters:["free","oss"]},
-        {name:"Taskade",  url:"https://www.taskade.com", icon:"📌",bg:"rgba(16,185,129,.15)", tag:"협업",    desc:"AI 통합 프로젝트 관리·협업 도구",                 domain:"taskade.com", filters:["free"]},
+      "모델 & 데이터":[
+        {name:"Hugging Face",    url:"https://huggingface.co",                   icon:"🤗",bg:"rgba(255,157,0,.15)",  tag:"허브",     desc:"AI 모델 & 데이터셋 최대 오픈 허브",         domain:"huggingface.co",           filters:["free","api","oss"]},
+        {name:"Ollama",          url:"https://ollama.ai",                        icon:"🦙",bg:"rgba(103,232,249,.1)", tag:"로컬",     desc:"로컬 PC에서 LLM 직접 실행",                 domain:"ollama.ai",                filters:["free","oss"]},
+        {name:"Pinecone",        url:"https://www.pinecone.io",                  icon:"🌲",bg:"rgba(34,197,94,.15)",  tag:"벡터DB",   desc:"AI 애플리케이션용 벡터 데이터베이스",        domain:"pinecone.io",              filters:["free","api"]},
+        {name:"Kaggle",          url:"https://www.kaggle.com",                   icon:"🏆",bg:"rgba(32,190,255,.15)", tag:"데이터",   desc:"데이터 사이언스 경진대회 & 데이터셋",        domain:"kaggle.com",               filters:["free"]},
+        {name:"Google Colab",    url:"https://colab.research.google.com",        icon:"📓",bg:"rgba(249,171,0,.15)",  tag:"Notebook", desc:"무료 GPU/TPU 제공 Python 노트북 환경",       domain:"colab.research.google.com",filters:["free"]},
+        {name:"Weights & Biases",url:"https://wandb.ai",                         icon:"📊",bg:"rgba(255,190,0,.15)",  tag:"MLOps",    desc:"ML 실험 추적 & 모델 모니터링",               domain:"wandb.ai",                 filters:["free","api"]},
+        {name:"LangChain",       url:"https://www.langchain.com",                icon:"⛓️",bg:"rgba(5,150,105,.15)",  tag:"프레임워크",desc:"LLM 앱 개발을 위한 오픈소스 프레임워크",    domain:"langchain.com",            filters:["free","oss"]},
+        {name:"LlamaIndex",      url:"https://www.llamaindex.ai",                icon:"🦙",bg:"rgba(245,158,11,.15)", tag:"프레임워크",desc:"LLM + 데이터 연결 프레임워크. RAG 특화",    domain:"llamaindex.ai",            filters:["free","oss"]},
+        {name:"Dify",            url:"https://dify.ai",                          icon:"🧩",bg:"rgba(99,102,241,.15)", tag:"노코드",   desc:"노코드 LLM 앱 빌더 & 에이전트 플랫폼",      domain:"dify.ai",                  filters:["free","oss"]},
+      ],
+      "코드 저장소":[
+        {name:"GitHub",    url:"https://github.com",        icon:"🐙",bg:"rgba(226,232,240,.08)",tag:"코드", desc:"세계 최대 코드 호스팅 & 협업 플랫폼",   domain:"github.com",    filters:["free","ko"]},
+        {name:"GitLab",    url:"https://gitlab.com",        icon:"🦊",bg:"rgba(252,109,38,.15)", tag:"코드", desc:"DevOps 올인원 통합 플랫폼",             domain:"gitlab.com",    filters:["free","oss"]},
+        {name:"Bitbucket", url:"https://bitbucket.org",     icon:"🔵",bg:"rgba(0,82,204,.15)",   tag:"코드", desc:"Atlassian의 팀 코드 저장소",            domain:"bitbucket.org", filters:["free"]},
       ],
     }
   },
-  platform: {
-    title:"AI 플랫폼", desc:"AI 모델, 도구, 연구를 위한 플랫폼 및 커뮤니티",
-    subs: {
-      "모델 허브": [
-        {name:"Hugging Face",url:"https://huggingface.co",   icon:"🤗",bg:"rgba(255,157,0,.15)",  tag:"허브",    desc:"AI 모델·데이터셋·데모 공유 플랫폼. AI의 GitHub",domain:"huggingface.co",filters:["free","api","oss"]},
-        {name:"Ollama",      url:"https://ollama.ai",        icon:"🦙",bg:"rgba(103,232,249,.1)", tag:"로컬",    desc:"로컬에서 LLM 실행. 오픈소스 모델 관리",         domain:"ollama.ai",     filters:["free","oss"]},
-        {name:"Together AI", url:"https://www.together.ai",  icon:"🔧",bg:"rgba(99,102,241,.15)", tag:"API",     desc:"오픈소스 AI 모델 API 제공 플랫폼",               domain:"together.ai",   filters:["free","api"]},
-        {name:"Replicate",   url:"https://replicate.com",    icon:"♻️",bg:"rgba(124,58,237,.15)", tag:"API",     desc:"클라우드에서 AI 모델 실행 API",                  domain:"replicate.com", filters:["api"]},
-        {name:"OpenRouter",  url:"https://openrouter.ai",    icon:"🔀",bg:"rgba(14,165,233,.15)", tag:"API",     desc:"다양한 AI 모델을 단일 API로 통합 제공",           domain:"openrouter.ai", filters:["free","api"]},
-        {name:"Groq",        url:"https://groq.com",         icon:"⚡",bg:"rgba(244,63,94,.15)",  tag:"추론",    desc:"LPU 기반 초고속 AI 추론 서비스",                 domain:"groq.com",      filters:["free","api"]},
-        {name:"Mistral AI",  url:"https://mistral.ai",       icon:"🌬️",bg:"rgba(255,165,0,.15)",  tag:"유럽",    desc:"유럽 오픈소스 LLM. 효율적인 경량 모델 제공",     domain:"mistral.ai",    filters:["free","api","oss"]},
+  design:{
+    title:"UI/UX 디자인", desc:"디자인 도구·레퍼런스·영감·학습 리소스",
+    subs:{
+      "디자인 도구":[
+        {name:"Figma",         url:"https://www.figma.com",         icon:"🎨",bg:"rgba(162,89,255,.15)", tag:"UI/UX",   desc:"협업 기반 UI/UX 디자인 표준 툴",                   domain:"figma.com",      filters:["free","ko"]},
+        {name:"Penpot",        url:"https://penpot.app",            icon:"✏️",bg:"rgba(99,102,241,.15)", tag:"오픈소스",desc:"오픈소스 Figma 대안. 자체 호스팅 가능",             domain:"penpot.app",     filters:["free","oss"]},
+        {name:"Uizard",        url:"https://uizard.io",             icon:"📱",bg:"rgba(99,102,241,.15)", tag:"AI",      desc:"스케치·텍스트로 앱 목업 자동 생성",                 domain:"uizard.io",      filters:["free"]},
+        {name:"Galileo AI",    url:"https://www.usegalileo.ai",     icon:"🔭",bg:"rgba(245,158,11,.15)", tag:"AI",      desc:"텍스트 프롬프트로 UI 디자인 즉시 생성",             domain:"usegalileo.ai",  filters:["free"]},
+        {name:"Unsplash",      url:"https://unsplash.com",          icon:"📷",bg:"rgba(0,0,0,.3)",       tag:"사진",    desc:"고품질 무료 스톡 사진 라이브러리",                  domain:"unsplash.com",   filters:["free"]},
+        {name:"Coolors",       url:"https://coolors.co",            icon:"🎨",bg:"rgba(99,102,241,.15)", tag:"컬러",    desc:"AI 기반 컬러 팔레트 생성 & 탐색",                  domain:"coolors.co",     filters:["free"]},
+        {name:"Fontshare",     url:"https://www.fontshare.com",     icon:"🔤",bg:"rgba(16,185,129,.15)", tag:"폰트",    desc:"상업용 무료 고품질 폰트 라이브러리",                domain:"fontshare.com",  filters:["free"]},
+        {name:"Fontpair",      url:"https://www.fontpair.co",       icon:"🔡",bg:"rgba(245,158,11,.15)", tag:"폰트",    desc:"어울리는 Google 폰트 조합 추천",                   domain:"fontpair.co",    filters:["free"]},
+        {name:"Iconify",       url:"https://iconify.design",        icon:"✦",bg:"rgba(99,102,241,.15)",  tag:"아이콘",  desc:"20만+ 아이콘 통합 검색·사용 플랫폼",               domain:"iconify.design", filters:["free","oss"]},
+        {name:"LottieFiles",   url:"https://lottiefiles.com",       icon:"🎬",bg:"rgba(0,196,204,.15)",  tag:"애니메이션",desc:"경량 JSON 애니메이션 제작 & 공유",               domain:"lottiefiles.com",filters:["free"]},
+        {name:"Rive",          url:"https://rive.app",              icon:"🎮",bg:"rgba(99,102,241,.15)", tag:"모션",    desc:"인터랙티브 애니메이션 & 게임 UI 제작",             domain:"rive.app",       filters:["free"]},
+        {name:"Spline",        url:"https://spline.design",         icon:"🌐",bg:"rgba(14,165,233,.15)", tag:"3D",      desc:"브라우저에서 바로 쓰는 3D 디자인 툴",              domain:"spline.design",  filters:["free"]},
+        {name:"Shots.so",      url:"https://shots.so",              icon:"📸",bg:"rgba(168,85,247,.15)", tag:"목업",    desc:"세련된 목업 & 스크린샷 생성기",                   domain:"shots.so",       filters:["free"]},
+        {name:"Contrast",      url:"https://usecontrast.com",       icon:"⚫",bg:"rgba(200,200,200,.08)",tag:"접근성",  desc:"접근성 기준 색상 대비 체커",                       domain:"usecontrast.com",filters:["free"]},
+        {name:"Locofy",        url:"https://www.locofy.ai",         icon:"🚂",bg:"rgba(99,102,241,.15)", tag:"D2C",     desc:"Figma 디자인을 React·Next.js 코드로 변환",         domain:"locofy.ai",      filters:["free"]},
+        {name:"Builder.io",    url:"https://www.builder.io",        icon:"🧱",bg:"rgba(6,182,212,.15)",  tag:"비주얼",  desc:"비주얼 에디터로 React·Vue 컴포넌트 생성",          domain:"builder.io",     filters:["free"]},
       ],
-      "개발 플랫폼": [
-        {name:"GitHub",          url:"https://github.com",                   icon:"🐙",bg:"rgba(226,232,240,.08)",tag:"코드",     desc:"코드 호스팅 및 협업 플랫폼. AI 프로젝트의 허브",domain:"github.com",               filters:["free","ko"]},
-        {name:"Google Colab",    url:"https://colab.research.google.com",    icon:"📓",bg:"rgba(249,171,0,.15)",  tag:"Notebook", desc:"무료 GPU/TPU 제공 Python 노트북 환경",           domain:"colab.research.google.com",filters:["free"]},
-        {name:"Kaggle",          url:"https://www.kaggle.com",               icon:"🏆",bg:"rgba(32,190,255,.15)", tag:"데이터",   desc:"데이터 과학 경진대회 및 공개 데이터셋 플랫폼",    domain:"kaggle.com",               filters:["free"]},
-        {name:"Weights & Biases",url:"https://wandb.ai",                     icon:"📊",bg:"rgba(255,190,0,.15)",  tag:"MLOps",    desc:"ML 실험 추적 및 모델 관리 플랫폼",               domain:"wandb.ai",                 filters:["free","api"]},
-        {name:"LangChain",       url:"https://www.langchain.com",            icon:"⛓️",bg:"rgba(5,150,105,.15)",  tag:"프레임워크",desc:"LLM 앱 개발 프레임워크. AI 에이전트 구축",        domain:"langchain.com",            filters:["free","oss"]},
-        {name:"LlamaIndex",      url:"https://www.llamaindex.ai",            icon:"🦙",bg:"rgba(245,158,11,.15)", tag:"프레임워크",desc:"LLM + 데이터 연결 프레임워크. RAG 특화",          domain:"llamaindex.ai",            filters:["free","oss"]},
+      "레퍼런스 & 영감":[
+        {name:"Dribbble",     url:"https://dribbble.com",            icon:"🏀",bg:"rgba(234,76,137,.15)", tag:"포트폴리오",desc:"전 세계 디자이너 포트폴리오 & 트렌드",          domain:"dribbble.com",     filters:["free"]},
+        {name:"Behance",      url:"https://www.behance.net",         icon:"🅱️",bg:"rgba(0,87,255,.15)",   tag:"포트폴리오",desc:"Adobe 운영 크리에이티브 작품 플랫폼",           domain:"behance.net",      filters:["free"]},
+        {name:"Awwwards",     url:"https://www.awwwards.com",        icon:"🏆",bg:"rgba(245,158,11,.15)", tag:"어워드",    desc:"최고 수준 웹 디자인 어워드 & 레퍼런스",         domain:"awwwards.com",     filters:["free"]},
+        {name:"Mobbin",       url:"https://mobbin.com",              icon:"📱",bg:"rgba(99,102,241,.15)", tag:"UI패턴",    desc:"실제 앱 UI 패턴 & 스크린 플로우 아카이브",      domain:"mobbin.com",       filters:["free"]},
+        {name:"Refero",       url:"https://refero.design",           icon:"🔍",bg:"rgba(168,85,247,.15)", tag:"UI패턴",    desc:"실제 앱 UI/UX 플로우 레퍼런스 모음",            domain:"refero.design",    filters:["free"]},
+        {name:"UI Garage",    url:"https://uigarage.net",            icon:"🖥️",bg:"rgba(14,165,233,.15)", tag:"UI패턴",    desc:"앱·웹 UI 패턴 & 디자인 영감",                   domain:"uigarage.net",     filters:["free"]},
+        {name:"Land-book",    url:"https://land-book.com",           icon:"📖",bg:"rgba(16,185,129,.15)", tag:"랜딩",      desc:"고품질 랜딩 페이지 디자인 모음",                 domain:"land-book.com",    filters:["free"]},
+        {name:"SaaS Pages",   url:"https://saaspages.xyz",           icon:"🚀",bg:"rgba(99,102,241,.15)", tag:"랜딩",      desc:"SaaS 제품 랜딩 페이지 레퍼런스",                 domain:"saaspages.xyz",    filters:["free"]},
+        {name:"Pinterest",    url:"https://www.pinterest.com",       icon:"📌",bg:"rgba(230,0,35,.15)",   tag:"영감",      desc:"비주얼 아이디어 & 디자인 영감 보드",             domain:"pinterest.com",    filters:["free"]},
+        {name:"Muzli",        url:"https://muz.li",                  icon:"🎨",bg:"rgba(245,158,11,.15)", tag:"영감",      desc:"크롬 탭을 디자인 영감 피드로 변환",              domain:"muz.li",           filters:["free"]},
+        {name:"Screenlane",   url:"https://screenlane.com",          icon:"📲",bg:"rgba(99,102,241,.15)", tag:"모바일",    desc:"모바일 UI 패턴 & 온보딩 플로우",                 domain:"screenlane.com",   filters:["free"]},
+        {name:"One Page Love",url:"https://onepagelove.com",         icon:"❤️",bg:"rgba(239,68,68,.15)",  tag:"랜딩",      desc:"싱글 페이지 웹사이트 디자인 모음",               domain:"onepagelove.com",  filters:["free"]},
+        {name:"Siteinspire",  url:"https://www.siteinspire.com",     icon:"💡",bg:"rgba(14,165,233,.15)", tag:"영감",      desc:"고품질 웹 디자인 쇼케이스",                      domain:"siteinspire.com",  filters:["free"]},
+        {name:"Bestfolios",   url:"https://www.bestfolios.com",      icon:"⭐",bg:"rgba(245,158,11,.15)", tag:"포트폴리오",desc:"최고 수준 디자이너 포트폴리오 큐레이션",         domain:"bestfolios.com",   filters:["free"]},
+        {name:"GDWeb",        url:"https://gdweb.co.kr",             icon:"🇰🇷",bg:"rgba(0,80,200,.15)",   tag:"국내",      desc:"국내 우수 웹사이트 어워드 & 레퍼런스",           domain:"gdweb.co.kr",      filters:["free","ko"]},
       ],
-      "AI 연구/뉴스": [
-        {name:"Papers With Code",url:"https://paperswithcode.com",          icon:"📄",bg:"rgba(33,203,206,.15)",  tag:"논문",desc:"AI 논문과 구현 코드를 연결하는 플랫폼",        domain:"paperswithcode.com",filters:["free"]},
-        {name:"Arxiv AI",        url:"https://arxiv.org/list/cs.AI/recent", icon:"🔬",bg:"rgba(179,27,27,.15)",   tag:"논문",desc:"AI/ML 최신 논문 프리프린트 서버",              domain:"arxiv.org",         filters:["free"]},
-        {name:"The Rundown AI",  url:"https://www.therundown.ai",           icon:"📰",bg:"rgba(100,116,139,.15)", tag:"뉴스",desc:"AI 최신 뉴스 뉴스레터 및 정보 허브",           domain:"therundown.ai",     filters:["free"]},
-        {name:"AI News",         url:"https://buttondown.com/ainews",       icon:"📡",bg:"rgba(99,102,241,.15)",  tag:"뉴스",desc:"AI 연구자들이 읽는 기술 중심 AI 뉴스레터",     domain:"buttondown.com",    filters:["free"]},
-        {name:"TLDR AI",         url:"https://tldr.tech/ai",                icon:"⚡",bg:"rgba(245,158,11,.15)",  tag:"뉴스",desc:"매일 5분으로 읽는 AI 뉴스 요약 뉴스레터",     domain:"tldr.tech",         filters:["free"]},
+      "학습 & 가이드":[
+        {name:"Laws of UX",       url:"https://lawsofux.com",                        icon:"📐",bg:"rgba(99,102,241,.15)", tag:"원칙",   desc:"UX 원칙과 심리학 기반 디자인 가이드",          domain:"lawsofux.com",         filters:["free"]},
+        {name:"Nielsen Norman",   url:"https://www.nngroup.com",                     icon:"🔬",bg:"rgba(16,185,129,.15)", tag:"리서치", desc:"UX 리서치 & 사용성 평가 기관",                  domain:"nngroup.com",          filters:["free"]},
+        {name:"Material Design",  url:"https://m3.material.io",                      icon:"🟦",bg:"rgba(66,133,244,.15)", tag:"Google", desc:"Google Material Design 3 공식 가이드",          domain:"m3.material.io",       filters:["free"]},
+        {name:"Apple HIG",        url:"https://developer.apple.com/design",          icon:"🍎",bg:"rgba(200,200,200,.08)",tag:"Apple",  desc:"Apple 플랫폼 UI/UX 공식 디자인 가이드라인",     domain:"developer.apple.com",  filters:["free"]},
+        {name:"Smashing Magazine",url:"https://www.smashingmagazine.com",            icon:"📰",bg:"rgba(245,158,11,.15)", tag:"아티클", desc:"웹 디자인·개발 심층 아티클 & 튜토리얼",         domain:"smashingmagazine.com", filters:["free"]},
+        {name:"UX Collective",    url:"https://uxdesign.cc",                         icon:"🎨",bg:"rgba(236,72,153,.15)", tag:"미디엄", desc:"UX 디자이너를 위한 큐레이션 미디엄",            domain:"uxdesign.cc",          filters:["free"]},
+        {name:"Checklist Design", url:"https://www.checklist.design",                icon:"✅",bg:"rgba(34,197,94,.15)",  tag:"체크리스트",desc:"UI 컴포넌트별 베스트 프랙티스 체크리스트", domain:"checklist.design",     filters:["free"]},
+        {name:"Figma Community",  url:"https://www.figma.com/community",             icon:"🤝",bg:"rgba(162,89,255,.15)", tag:"커뮤니티",desc:"무료 Figma 템플릿·컴포넌트·플러그인",          domain:"figma.com",            filters:["free"]},
+      ],
+    }
+  },
+  productivity:{
+    title:"AI 생산성", desc:"AI로 업무 효율을 높이는 생산성 도구",
+    subs:{
+      "프레젠테이션/문서":[
+        {name:"Notion AI",   url:"https://www.notion.so",       icon:"📝",bg:"rgba(200,200,200,.08)",tag:"문서", desc:"올인원 협업 툴 + AI 작성·요약·번역 기능",  domain:"notion.so",     filters:["free","ko"]},
+        {name:"Beautiful.ai",url:"https://www.beautiful.ai",    icon:"🎨",bg:"rgba(99,102,241,.15)", tag:"PPT",  desc:"AI가 자동으로 디자인하는 프레젠테이션",     domain:"beautiful.ai",  filters:[]},
+        {name:"SlidesAI",    url:"https://www.slidesai.io",     icon:"📊",bg:"rgba(66,133,244,.15)", tag:"PPT",  desc:"Google Slides AI 자동 생성 확장 프로그램",  domain:"slidesai.io",   filters:["free"]},
+        {name:"Tome",        url:"https://tome.app",            icon:"📖",bg:"rgba(245,158,11,.15)", tag:"PPT",  desc:"AI 스토리텔링 프레젠테이션 도구",           domain:"tome.app",      filters:["free"]},
+        {name:"Obsidian",    url:"https://obsidian.md",         icon:"💎",bg:"rgba(124,58,237,.15)", tag:"노트", desc:"로컬 마크다운 노트. AI 플러그인 생태계",    domain:"obsidian.md",   filters:["free"]},
+      ],
+      "AI 글쓰기":[
+        {name:"Grammarly",  url:"https://www.grammarly.com",icon:"✅",bg:"rgba(67,160,71,.15)",  tag:"교정",  desc:"AI 문법 교정·스타일 개선. 영어 글쓰기 필수",domain:"grammarly.com", filters:["free"]},
+        {name:"DeepL",      url:"https://www.deepl.com",    icon:"🌍",bg:"rgba(0,100,200,.15)",  tag:"번역",  desc:"AI 기반 고품질 번역 서비스. 자연스러운 번역",domain:"deepl.com",     filters:["free","ko"]},
+        {name:"QuillBot",   url:"https://quillbot.com",     icon:"🦜",bg:"rgba(34,197,94,.15)",  tag:"교정",  desc:"AI 패러프레이징·요약·문법 교정 도구",       domain:"quillbot.com",  filters:["free"]},
+        {name:"Jasper AI",  url:"https://www.jasper.ai",    icon:"✍️",bg:"rgba(245,158,11,.15)", tag:"카피",  desc:"마케팅·광고 카피 특화 AI 글쓰기 도구",      domain:"jasper.ai",     filters:[]},
+        {name:"Copy.ai",    url:"https://www.copy.ai",      icon:"📋",bg:"rgba(99,102,241,.15)", tag:"카피",  desc:"광고 카피·블로그·이메일 자동 작성",          domain:"copy.ai",       filters:["free"]},
+        {name:"Writesonic", url:"https://writesonic.com",   icon:"🖊️",bg:"rgba(16,185,129,.15)", tag:"블로그",desc:"SEO 최적화 블로그·광고 문구 AI 생성",        domain:"writesonic.com",filters:["free"]},
+      ],
+      "업무 자동화":[
+        {name:"Zapier AI",url:"https://zapier.com",      icon:"⚡",bg:"rgba(255,102,0,.15)",  tag:"자동화",  desc:"앱 간 워크플로우 자동화. AI로 봇 생성",     domain:"zapier.com",  filters:["free"]},
+        {name:"Make",     url:"https://www.make.com",    icon:"🔄",bg:"rgba(124,58,237,.15)", tag:"자동화",  desc:"노코드 자동화 플랫폼. 복잡한 워크플로우",   domain:"make.com",    filters:["free"]},
+        {name:"n8n",      url:"https://n8n.io",          icon:"⚙️",bg:"rgba(234,88,12,.15)",  tag:"오픈소스",desc:"오픈소스 워크플로우 자동화. 셀프호스팅 가능",domain:"n8n.io",      filters:["free","oss"]},
+        {name:"Taskade",  url:"https://www.taskade.com", icon:"📌",bg:"rgba(16,185,129,.15)", tag:"협업",    desc:"AI 통합 프로젝트 관리·협업 도구",            domain:"taskade.com", filters:["free"]},
+      ],
+    }
+  },
+  research:{
+    title:"AI 리서치", desc:"AI 연구소·논문·학습·뉴스 커뮤니티",
+    subs:{
+      "AI 연구소":[
+        {name:"Anthropic",        url:"https://www.anthropic.com",   icon:"🤖",bg:"rgba(180,83,9,.15)",   tag:"연구소", desc:"Claude 개발사 & AI 안전 연구 선도",                   domain:"anthropic.com",   filters:[]},
+        {name:"OpenAI",           url:"https://openai.com",          icon:"💡",bg:"rgba(16,163,127,.15)", tag:"연구소", desc:"GPT·DALL·E·Sora 개발사",                             domain:"openai.com",      filters:[]},
+        {name:"Google DeepMind",  url:"https://deepmind.google",     icon:"🧠",bg:"rgba(66,133,244,.15)", tag:"연구소", desc:"구글의 핵심 AI 연구 조직. Gemini 개발",               domain:"deepmind.google", filters:[]},
+        {name:"xAI",              url:"https://x.ai",                icon:"⚡",bg:"rgba(200,200,200,.1)", tag:"연구소", desc:"Elon Musk의 Grok AI 연구소",                          domain:"x.ai",            filters:[]},
+        {name:"Meta AI Research", url:"https://ai.meta.com",         icon:"🌐",bg:"rgba(8,102,255,.15)",  tag:"연구소", desc:"Llama·SAM 등 오픈소스 AI 연구",                       domain:"ai.meta.com",     filters:["oss"]},
+        {name:"Mistral AI",       url:"https://mistral.ai",          icon:"🌬️",bg:"rgba(255,165,0,.15)",  tag:"연구소", desc:"유럽 대표 오픈소스 LLM 스타트업",                     domain:"mistral.ai",      filters:["free","api","oss"]},
+        {name:"Cohere",           url:"https://cohere.com",          icon:"🔷",bg:"rgba(57,134,232,.15)", tag:"연구소", desc:"엔터프라이즈 AI & NLP 플랫폼",                        domain:"cohere.com",      filters:["api"]},
+      ],
+      "논문 & 학습":[
+        {name:"Papers With Code",  url:"https://paperswithcode.com",          icon:"📄",bg:"rgba(33,203,206,.15)",  tag:"논문",  desc:"AI 논문 + 코드 + SOTA 벤치마크",              domain:"paperswithcode.com",    filters:["free"]},
+        {name:"Arxiv AI",          url:"https://arxiv.org/list/cs.AI/recent", icon:"🔬",bg:"rgba(179,27,27,.15)",   tag:"논문",  desc:"AI 분야 사전출판 논문 아카이브",               domain:"arxiv.org",             filters:["free"]},
+        {name:"Semantic Scholar",  url:"https://www.semanticscholar.org",     icon:"🎓",bg:"rgba(99,102,241,.15)",  tag:"학술",  desc:"AI 기반 학술 논문 검색 & 분석",               domain:"semanticscholar.org",   filters:["free"]},
+        {name:"DeepLearning.AI",   url:"https://www.deeplearning.ai",         icon:"🤖",bg:"rgba(14,165,233,.15)",  tag:"교육",  desc:"Andrew Ng의 AI 교육 플랫폼. 실용적 커리큘럼", domain:"deeplearning.ai",       filters:["free"]},
+        {name:"Fast.ai",           url:"https://www.fast.ai",                 icon:"⚡",bg:"rgba(245,158,11,.15)",  tag:"교육",  desc:"실전 딥러닝 무료 온라인 강의",                 domain:"fast.ai",               filters:["free"]},
+      ],
+      "뉴스 & 커뮤니티":[
+        {name:"The Batch",        url:"https://www.deeplearning.ai/the-batch/",       icon:"📬",bg:"rgba(14,165,233,.15)",  tag:"뉴스레터",desc:"Andrew Ng의 주간 AI 뉴스레터",              domain:"deeplearning.ai",    filters:["free"]},
+        {name:"The Rundown AI",   url:"https://www.therundown.ai",                    icon:"📰",bg:"rgba(100,116,139,.15)", tag:"뉴스레터",desc:"매일 받아보는 AI 트렌드 요약",              domain:"therundown.ai",      filters:["free"]},
+        {name:"TLDR AI",          url:"https://tldr.tech/ai",                         icon:"⚡",bg:"rgba(245,158,11,.15)",  tag:"뉴스레터",desc:"매일 5분으로 읽는 AI 뉴스 요약",            domain:"tldr.tech",          filters:["free"]},
+        {name:"Hacker News",      url:"https://news.ycombinator.com",                 icon:"🟠",bg:"rgba(255,102,0,.15)",   tag:"커뮤니티",desc:"YC 기반 테크 커뮤니티 토론",                domain:"news.ycombinator.com",filters:["free"]},
+        {name:"r/MachineLearning",url:"https://www.reddit.com/r/MachineLearning/",    icon:"🤖",bg:"rgba(255,69,0,.15)",    tag:"커뮤니티",desc:"머신러닝 Reddit 커뮤니티",                   domain:"reddit.com",         filters:["free"]},
+        {name:"AI News",          url:"https://www.artificialintelligence-news.com",  icon:"📡",bg:"rgba(99,102,241,.15)",  tag:"뉴스",    desc:"AI 업계 최신 뉴스 & 분석",                  domain:"artificialintelligence-news.com",filters:["free"]},
       ],
     }
   },
 };
 
 // ── STATE ──
-let currentCat = 'bookmarks';
-let currentSub = null;
-let searchQuery = '';
-let activeFilters = new Set();
-let bookmarks = new Set(JSON.parse(localStorage.getItem('ai_hub_bm') || '[]'));
+let currentCat='bookmarks', currentSub=null, searchQuery='', activeFilters=new Set();
+let bookmarks=new Set(JSON.parse(localStorage.getItem('ai_hub_bm')||'[]'));
 
-function getAllCards() {
-  const all = [];
-  Object.values(DATA).forEach(cat => Object.values(cat.subs).forEach(arr => all.push(...arr)));
-  return all;
-}
-
-function applyFiltersAndSearch(cards) {
-  return cards.filter(c => {
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
-      if (!c.name.toLowerCase().includes(q) && !c.desc.toLowerCase().includes(q)) return false;
-    }
-    for (const f of activeFilters) {
-      if (!c.filters.includes(f)) return false;
-    }
+function getAllCards(){const a=[];Object.values(DATA).forEach(c=>Object.values(c.subs).forEach(arr=>a.push(...arr)));return a;}
+function applyFiltersAndSearch(cards){
+  return cards.filter(c=>{
+    if(searchQuery){const q=searchQuery.toLowerCase();if(!c.name.toLowerCase().includes(q)&&!c.desc.toLowerCase().includes(q))return false;}
+    for(const f of activeFilters){if(!c.filters.includes(f))return false;}
     return true;
   });
 }
 
-// ── RENDER SIDEBAR ──
-function renderSidebar(cat) {
-  const el = document.getElementById('sidebarCats');
-  let html = '';
-  if (cat !== 'bookmarks') {
-    html += `<div class="sidebar-item ${currentSub===null?'active':''}" data-sub="__all">전체</div>`;
-    Object.keys(DATA[cat].subs).forEach(s => {
-      html += `<div class="sidebar-item ${currentSub===s?'active':''}" data-sub="${s}">${s}</div>`;
-    });
+function renderSidebar(cat){
+  const el=document.getElementById('sidebarCats');
+  let html='';
+  if(cat!=='bookmarks'){
+    html+=`<div class="sidebar-item ${currentSub===null?'active':''}" data-sub="__all">전체</div>`;
+    Object.keys(DATA[cat].subs).forEach(s=>{html+=`<div class="sidebar-item ${currentSub===s?'active':''}" data-sub="${s}">${s}</div>`;});
   }
-  el.innerHTML = html;
-  el.querySelectorAll('.sidebar-item[data-sub]').forEach(item => {
-    item.onclick = () => selectSub(item.dataset.sub === '__all' ? null : item.dataset.sub);
+  el.innerHTML=html;
+  el.querySelectorAll('.sidebar-item[data-sub]').forEach(item=>{
+    item.onclick=()=>selectSub(item.dataset.sub==='__all'?null:item.dataset.sub);
   });
 }
 
-// ── MAKE CARD ──
-function makeCard(c) {
-  const a = document.createElement('a');
-  a.className = 'card';
-  a.href = c.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-
-  const isBm = bookmarks.has(c.name);
-  const s = STARS[c.name] || 3;
-  const starHtml = stars(s);
-  const badges = c.filters.map(f => {
-    const L = {free:'무료',ko:'한국어',api:'API',oss:'오픈소스'};
-    return `<span class="fbadge ${f}">${L[f]}</span>`;
-  }).join('');
-
-  a.innerHTML = `
+function makeCard(c){
+  const a=document.createElement('a');
+  a.className='card'; a.href=c.url; a.target='_blank'; a.rel='noopener noreferrer';
+  const isBm=bookmarks.has(c.name);
+  const s=STARS_MAP[c.name]||3;
+  const badges=c.filters.map(f=>{const L={free:'무료',ko:'한국어',api:'API',oss:'오픈소스'};return`<span class="fbadge ${f}">${L[f]}</span>`;}).join('');
+  a.innerHTML=`
     <div class="card-top">
-      <div class="card-icon" style="background:${c.bg}">
-        <img class="card-favicon" src="${FAVICON(c.domain)}" alt="${c.name}">
-      </div>
+      <div class="card-icon" style="background:${c.bg}"><img class="card-favicon" src="${FAVICON(c.domain)}" alt="${c.name}"></div>
       <button class="bm-btn ${isBm?'active':''}" title="즐겨찾기">★</button>
     </div>
     <div class="card-name">${c.name}</div>
-    <div class="card-stars">${starHtml}</div>
+    <div class="card-stars">${stars(s)}</div>
     <div class="card-desc">${c.desc}</div>
     <div class="card-footer">
-      <div class="filter-badges">${badges || `<span class="card-tag">${c.tag}</span>`}</div>
+      <div class="filter-badges">${badges||`<span class="card-tag">${c.tag}</span>`}</div>
       <span class="card-arrow">→</span>
     </div>`;
-
-  const img = a.querySelector('.card-favicon');
-  img.onerror = () => {
-    img.style.display = 'none';
-    const sp = document.createElement('span');
-    sp.textContent = c.icon; sp.style.cssText = 'font-size:1.3rem';
-    img.parentNode.appendChild(sp);
-  };
-
-  const btn = a.querySelector('.bm-btn');
-  btn.onclick = e => {
-    e.preventDefault(); e.stopPropagation();
-    if (bookmarks.has(c.name)) { bookmarks.delete(c.name); btn.classList.remove('active'); }
-    else { bookmarks.add(c.name); btn.classList.add('active'); }
-    localStorage.setItem('ai_hub_bm', JSON.stringify([...bookmarks]));
-    if (currentCat === 'bookmarks') renderCards('bookmarks', null);
+  const img=a.querySelector('.card-favicon');
+  img.onerror=()=>{img.style.display='none';const sp=document.createElement('span');sp.textContent=c.icon;sp.style.cssText='font-size:1.3rem';img.parentNode.appendChild(sp);};
+  const btn=a.querySelector('.bm-btn');
+  btn.onclick=e=>{e.preventDefault();e.stopPropagation();
+    if(bookmarks.has(c.name)){bookmarks.delete(c.name);btn.classList.remove('active');}
+    else{bookmarks.add(c.name);btn.classList.add('active');}
+    localStorage.setItem('ai_hub_bm',JSON.stringify([...bookmarks]));
+    if(currentCat==='bookmarks')renderCards('bookmarks',null);
   };
   return a;
 }
 
-// ── RENDER CARDS ──
-function renderCards(cat, sub) {
-  const container = document.getElementById('cardsContainer');
-  container.innerHTML = '';
-  let total = 0;
-
-  if (cat === 'bookmarks') {
-    const cards = applyFiltersAndSearch(getAllCards().filter(c => bookmarks.has(c.name)));
-    total = cards.length;
-    if (!cards.length) {
-      container.innerHTML = `<div class="empty-state">
-        <div class="es-icon">⭐</div>
-        <h3>즐겨찾기가 없습니다</h3>
-        <p>각 카드의 <strong>★</strong> 버튼을 눌러<br>자주 사용하는 서비스를 추가해보세요</p>
-      </div>`;
-    } else {
-      const grid = document.createElement('div');
-      grid.className = 'cards-grid';
-      cards.forEach(c => grid.appendChild(makeCard(c)));
-      container.appendChild(grid);
-    }
+function renderCards(cat,sub){
+  const container=document.getElementById('cardsContainer');
+  container.innerHTML=''; let total=0;
+  if(cat==='bookmarks'){
+    const cards=applyFiltersAndSearch(getAllCards().filter(c=>bookmarks.has(c.name)));
+    total=cards.length;
+    if(!cards.length){container.innerHTML=`<div class="empty-state"><div class="es-icon">⭐</div><h3>즐겨찾기가 없습니다</h3><p>각 카드의 <strong>★</strong> 버튼을 눌러<br>자주 사용하는 서비스를 추가해보세요</p></div>`;}
+    else{const g=document.createElement('div');g.className='cards-grid';cards.forEach(c=>g.appendChild(makeCard(c)));container.appendChild(g);}
   } else {
-    const subs = DATA[cat].subs;
-    const keys = sub ? [sub] : Object.keys(subs);
-    let hasAny = false;
-    keys.forEach(k => {
-      const cards = applyFiltersAndSearch(subs[k]);
-      if (!cards.length) return;
-      total += cards.length; hasAny = true;
-      if (!sub) { const t = document.createElement('div'); t.className='subcat-title'; t.textContent=k; container.appendChild(t); }
-      const grid = document.createElement('div'); grid.className = 'cards-grid';
-      cards.forEach(c => grid.appendChild(makeCard(c)));
-      container.appendChild(grid);
+    const subs=DATA[cat].subs, keys=sub?[sub]:Object.keys(subs); let hasAny=false;
+    keys.forEach(k=>{
+      const cards=applyFiltersAndSearch(subs[k]);
+      if(!cards.length)return;
+      total+=cards.length; hasAny=true;
+      if(!sub){const t=document.createElement('div');t.className='subcat-title';t.textContent=k;container.appendChild(t);}
+      const g=document.createElement('div');g.className='cards-grid';
+      cards.forEach(c=>g.appendChild(makeCard(c)));container.appendChild(g);
     });
-    if (!hasAny) {
-      container.innerHTML = `<div class="empty-state">
-        <div class="es-icon">🔍</div><h3>검색 결과가 없습니다</h3>
-        <p>다른 검색어나 필터를 시도해보세요</p>
-      </div>`;
-    }
+    if(!hasAny)container.innerHTML=`<div class="empty-state"><div class="es-icon">🔍</div><h3>검색 결과가 없습니다</h3><p>다른 검색어나 필터를 시도해보세요</p></div>`;
   }
-
-  const countEl = document.getElementById('searchCount');
-  countEl.textContent = (searchQuery || activeFilters.size) ? `${total}개 결과` : '';
+  const ce=document.getElementById('searchCount');
+  ce.textContent=(searchQuery||activeFilters.size)?`${total}개 결과`:'';
 }
 
-// ── SELECT CATEGORY ──
-function selectCat(cat) {
-  currentCat = cat; currentSub = null;
-  document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.cat === cat));
-  if (cat === 'bookmarks') {
-    document.getElementById('sectionTitle').textContent = '⭐ 즐겨찾기';
-    document.getElementById('sectionDesc').textContent = '북마크한 AI 서비스 모음';
-  } else {
-    document.getElementById('sectionTitle').textContent = DATA[cat].title;
-    document.getElementById('sectionDesc').textContent = DATA[cat].desc;
-  }
-  renderSidebar(cat);
-  renderCards(cat, null);
+function selectCat(cat){
+  currentCat=cat; currentSub=null;
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active',el.dataset.cat===cat));
+  if(cat==='bookmarks'){document.getElementById('sectionTitle').textContent='⭐ 즐겨찾기';document.getElementById('sectionDesc').textContent='북마크한 AI 서비스 모음';}
+  else{document.getElementById('sectionTitle').textContent=DATA[cat].title;document.getElementById('sectionDesc').textContent=DATA[cat].desc;}
+  renderSidebar(cat); renderCards(cat,null);
+}
+function selectSub(sub){
+  currentSub=sub;
+  document.querySelectorAll('#sidebarCats .sidebar-item').forEach(el=>el.classList.toggle('active',(el.dataset.sub==='__all'?null:el.dataset.sub)===sub));
+  document.getElementById('sectionTitle').textContent=sub||DATA[currentCat].title;
+  renderCards(currentCat,sub);
 }
 
-// ── SELECT SUB ──
-function selectSub(sub) {
-  currentSub = sub;
-  document.querySelectorAll('#sidebarCats .sidebar-item').forEach(el => {
-    el.classList.toggle('active', (el.dataset.sub === '__all' ? null : el.dataset.sub) === sub);
-  });
-  document.getElementById('sectionTitle').textContent = sub || DATA[currentCat].title;
-  renderCards(currentCat, sub);
-}
-
-// ── SEARCH ──
-document.getElementById('globalSearch').oninput = e => {
-  searchQuery = e.target.value;
-  renderCards(currentCat, currentSub);
-};
-
-// ── FILTERS ──
-document.querySelectorAll('.filter-opt[data-f]').forEach(el => {
-  el.onclick = () => {
-    const f = el.dataset.f;
-    const cb = el.querySelector('.fchk');
-    if (activeFilters.has(f)) { activeFilters.delete(f); el.classList.remove('active'); cb.textContent=''; }
-    else { activeFilters.add(f); el.classList.add('active'); cb.textContent='✓'; }
-    renderCards(currentCat, currentSub);
+document.getElementById('globalSearch').oninput=e=>{searchQuery=e.target.value;renderCards(currentCat,currentSub);};
+document.querySelectorAll('.filter-opt[data-f]').forEach(el=>{
+  el.onclick=()=>{const f=el.dataset.f,cb=el.querySelector('.fchk');
+    if(activeFilters.has(f)){activeFilters.delete(f);el.classList.remove('active');cb.textContent='';}
+    else{activeFilters.add(f);el.classList.add('active');cb.textContent='✓';}
+    renderCards(currentCat,currentSub);
   };
 });
-
-// ── NAV ──
-document.querySelectorAll('.nav-item').forEach(el =>
-  el.addEventListener('click', () => selectCat(el.dataset.cat)));
-
-// ── INIT ──
-selectCat(bookmarks.size > 0 ? 'bookmarks' : 'chatbot');
+document.querySelectorAll('.nav-item').forEach(el=>el.addEventListener('click',()=>selectCat(el.dataset.cat)));
+selectCat(bookmarks.size>0?'bookmarks':'assistant');
 </script>
 </body>
 </html>
