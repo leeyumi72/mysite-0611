@@ -175,6 +175,7 @@
     <li class="nav-item" data-cat="image"><span class="emoji">🎨</span> AI 이미지</li>
     <li class="nav-item" data-cat="media"><span class="emoji">🎵</span> AI 영상/음악</li>
     <li class="nav-item" data-cat="coding"><span class="emoji">💻</span> AI 코딩</li>
+    <li class="nav-item" data-cat="design"><span class="emoji">🖌️</span> AI 디자인</li>
     <li class="nav-item" data-cat="productivity"><span class="emoji">✨</span> AI 생산성</li>
     <li class="nav-item" data-cat="platform"><span class="emoji">🚀</span> AI 플랫폼</li>
   </ul>
@@ -301,13 +302,47 @@ const DATA = {
         { name:"Aider",          url:"https://aider.chat",                  icon:"🤝", bg:"rgba(168,85,247,.15)", tag:"터미널",   desc:"터미널 기반 AI 페어 프로그래밍 도구" },
       ],
       "AI 앱 빌더": [
-        { name:"Lovable",  url:"https://lovable.dev",   icon:"💜", bg:"rgba(147,51,234,.15)",  tag:"앱빌더",  desc:"AI로 풀스택 웹앱 생성. 디자인부터 배포까지" },
-        { name:"V0",       url:"https://v0.dev",         icon:"▲",  bg:"rgba(200,200,200,.08)", tag:"Vercel",  desc:"Vercel의 AI UI 컴포넌트 생성기. React/Tailwind" },
-        { name:"Bolt.new", url:"https://bolt.new",       icon:"⚡", bg:"rgba(245,158,11,.15)",  tag:"앱빌더",  desc:"StackBlitz의 AI 풀스택 앱 빌더. 즉시 배포" },
-        { name:"Tempo",    url:"https://www.tempo.new",  icon:"🎯", bg:"rgba(225,29,72,.15)",   tag:"앱빌더",  desc:"React 앱을 위한 AI 비주얼 에디터" },
-        { name:"Dora AI",  url:"https://www.dora.run",   icon:"🎨", bg:"rgba(99,102,241,.15)",  tag:"노코드",  desc:"AI 노코드 웹사이트 빌더. 3D 효과 지원" },
-        { name:"Vercel",   url:"https://vercel.com",     icon:"▲",  bg:"rgba(200,200,200,.08)", tag:"배포",    desc:"프론트엔드 배포 플랫폼. AI 앱 원클릭 배포" },
-        { name:"Supabase", url:"https://supabase.com",   icon:"🟩", bg:"rgba(62,207,142,.15)",  tag:"DB",      desc:"오픈소스 Firebase 대안. AI 앱 백엔드 구축" },
+        { name:"Google AI Studio", url:"https://aistudio.google.com",  icon:"🧪", bg:"rgba(66,133,244,.15)",  tag:"Google",  desc:"Google의 AI 개발 플레이그라운드. Gemini API 테스트·프로토타이핑" },
+        { name:"Lovable",          url:"https://lovable.dev",          icon:"💜", bg:"rgba(147,51,234,.15)",  tag:"앱빌더",  desc:"AI로 풀스택 웹앱 생성. 디자인부터 배포까지" },
+        { name:"V0",               url:"https://v0.dev",               icon:"▲",  bg:"rgba(200,200,200,.08)", tag:"Vercel",  desc:"Vercel의 AI UI 컴포넌트 생성기. React/Tailwind" },
+        { name:"Bolt.new",         url:"https://bolt.new",             icon:"⚡", bg:"rgba(245,158,11,.15)",  tag:"앱빌더",  desc:"StackBlitz의 AI 풀스택 앱 빌더. 즉시 배포" },
+        { name:"Tempo",            url:"https://www.tempo.new",        icon:"🎯", bg:"rgba(225,29,72,.15)",   tag:"앱빌더",  desc:"React 앱을 위한 AI 비주얼 에디터" },
+        { name:"Dora AI",          url:"https://www.dora.run",         icon:"🎨", bg:"rgba(99,102,241,.15)",  tag:"노코드",  desc:"AI 노코드 웹사이트 빌더. 3D 효과 지원" },
+        { name:"Vercel",           url:"https://vercel.com",           icon:"▲",  bg:"rgba(200,200,200,.08)", tag:"배포",    desc:"프론트엔드 배포 플랫폼. AI 앱 원클릭 배포" },
+        { name:"Supabase",         url:"https://supabase.com",         icon:"🟩", bg:"rgba(62,207,142,.15)",  tag:"DB",      desc:"오픈소스 Firebase 대안. AI 앱 백엔드 구축" },
+      ],
+    }
+  },
+  design: {
+    title: "AI 디자인",
+    desc: "AI 기반 UI/UX·그래픽·웹 디자인 도구 모음",
+    subs: {
+      "UI/UX 디자인": [
+        { name:"Figma",       url:"https://www.figma.com",          icon:"🎨", bg:"rgba(162,89,255,.15)",  tag:"UI/UX",   desc:"협업 디자인 툴의 표준. AI 기능·플러그인 생태계" },
+        { name:"Uizard",      url:"https://uizard.io",              icon:"📱", bg:"rgba(99,102,241,.15)",  tag:"UI/UX",   desc:"스케치·텍스트로 앱 목업 자동 생성" },
+        { name:"Galileo AI",  url:"https://www.usegalileo.ai",      icon:"🔭", bg:"rgba(245,158,11,.15)",  tag:"UI/UX",   desc:"텍스트 프롬프트로 UI 디자인 즉시 생성" },
+        { name:"Visily",      url:"https://www.visily.ai",          icon:"👁️", bg:"rgba(16,185,129,.15)",  tag:"UI/UX",   desc:"스크린샷·템플릿으로 와이어프레임 자동 생성" },
+        { name:"Framer",      url:"https://www.framer.com",         icon:"⚡", bg:"rgba(0,200,255,.15)",   tag:"웹디자인", desc:"AI 웹사이트 생성 + 프로토타이핑 + 퍼블리싱 통합" },
+        { name:"Penpot",      url:"https://penpot.app",             icon:"✏️", bg:"rgba(99,102,241,.15)",  tag:"오픈소스", desc:"오픈소스 디자인·프로토타이핑 툴. Figma 대안" },
+      ],
+      "웹 디자인": [
+        { name:"Webflow",     url:"https://webflow.com",            icon:"🌊", bg:"rgba(73,141,255,.15)",  tag:"노코드",  desc:"노코드 웹 디자인·CMS·호스팅 올인원 플랫폼" },
+        { name:"Wix AI",      url:"https://www.wix.com",            icon:"⬛", bg:"rgba(0,0,0,.3)",        tag:"노코드",  desc:"AI 웹사이트 빌더. 텍스트만으로 사이트 생성" },
+        { name:"Relume",      url:"https://www.relume.io",          icon:"🧱", bg:"rgba(99,102,241,.15)",  tag:"컴포넌트", desc:"AI로 사이트맵·와이어프레임·컴포넌트 자동 생성" },
+        { name:"Durable",     url:"https://durable.co",             icon:"🏗️", bg:"rgba(245,158,11,.15)",  tag:"웹빌더",  desc:"30초 만에 AI가 비즈니스 웹사이트 자동 생성" },
+        { name:"Hostinger AI",url:"https://www.hostinger.com/ai-website-builder", icon:"🌐", bg:"rgba(6,182,212,.15)", tag:"웹빌더", desc:"AI 웹사이트 빌더 + 호스팅 통합 서비스" },
+      ],
+      "로고/브랜딩": [
+        { name:"Looka",       url:"https://looka.com",              icon:"🦅", bg:"rgba(99,102,241,.15)",  tag:"로고",    desc:"AI 로고 생성기. 브랜드 아이덴티티 패키지 제공" },
+        { name:"Brandmark",   url:"https://brandmark.io",           icon:"🔖", bg:"rgba(244,63,94,.15)",   tag:"로고",    desc:"AI 로고·브랜드 디자인 자동 생성" },
+        { name:"Designs.ai",  url:"https://designs.ai",             icon:"🎯", bg:"rgba(168,85,247,.15)",  tag:"브랜딩",  desc:"로고·영상·카피 등 브랜딩 올인원 AI 플랫폼" },
+        { name:"Namecheap Logo", url:"https://www.namecheap.com/logo-maker/", icon:"🏷️", bg:"rgba(255,102,0,.15)", tag:"로고", desc:"무료 AI 로고 메이커. 다운로드 즉시 가능" },
+      ],
+      "디자인→코드": [
+        { name:"Locofy",      url:"https://www.locofy.ai",          icon:"🚂", bg:"rgba(99,102,241,.15)",  tag:"D2C",     desc:"Figma·Adobe XD 디자인을 React·Next.js 코드로 변환" },
+        { name:"Anima",       url:"https://www.animaapp.com",       icon:"🎬", bg:"rgba(245,158,11,.15)",  tag:"D2C",     desc:"Figma 플러그인으로 디자인을 HTML/React로 변환" },
+        { name:"DhiWise",     url:"https://www.dhiwise.com",        icon:"⚙️", bg:"rgba(16,185,129,.15)",  tag:"D2C",     desc:"Figma 디자인에서 Flutter·React 코드 자동 생성" },
+        { name:"Builder.io",  url:"https://www.builder.io",         icon:"🧱", bg:"rgba(6,182,212,.15)",   tag:"비주얼",  desc:"비주얼 에디터로 React·Vue·Angular 컴포넌트 생성" },
       ],
     }
   },
