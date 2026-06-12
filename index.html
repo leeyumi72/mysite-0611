@@ -184,7 +184,7 @@
 
 <nav class="top-nav">
   <div class="nav-left">
-    <div class="logo">⚡ AI Hub</div>
+    <div class="logo" id="logoHome" style="cursor:pointer;">⚡ AI Hub</div>
     <ul class="nav-list" id="topNav">
       <li class="nav-item" data-cat="lectures">강의자료</li>
       <li class="nav-item" data-cat="assistant">AI 어시스턴트</li>
@@ -737,6 +737,12 @@ document.querySelectorAll('.filter-opt[data-f]').forEach(el=>{
 });
 document.querySelectorAll('.nav-item').forEach(el=>el.addEventListener('click',()=>selectCat(el.dataset.cat)));
 document.getElementById('bmNavBtn').onclick=()=>selectCat('bookmarks');
+document.getElementById('logoHome').onclick=()=>{
+  document.getElementById('globalSearch').value='';
+  searchQuery=''; activeFilters=new Set();
+  document.querySelectorAll('.filter-opt').forEach(el=>{el.classList.remove('active');el.querySelector('.fchk').textContent='';});
+  selectCat(bookmarks.size>0?'bookmarks':'assistant');
+};
 selectCat(bookmarks.size>0?'bookmarks':'assistant');
 
 // ── ADMIN ──
