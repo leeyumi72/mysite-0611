@@ -576,7 +576,7 @@ const DATA = {
 };
 
 // ── STATE ──
-let currentCat='bookmarks', currentSub=null, searchQuery='', activeFilters=new Set();
+let currentCat='bookmarks', currentSub=null, currentBmCat=null, searchQuery='', activeFilters=new Set();
 let bookmarks=new Set(JSON.parse(localStorage.getItem('ai_hub_bm')||'[]'));
 
 // ── ADMIN STATE ──
@@ -601,14 +601,31 @@ function applyFiltersAndSearch(cards){
 function renderSidebar(cat){
   const el=document.getElementById('sidebarCats');
   let html='';
-  if(cat!=='bookmarks'){
+  if(cat==='bookmarks'){
+    const bmTitles=[];
+    Object.values(DATA).forEach(d=>{
+      const has=Object.values(d.subs).some(arr=>arr.some(c=>bookmarks.has(c.name)));
+      if(has && !bmTitles.includes(d.title)) bmTitles.push(d.title);
+    });
+    html+=`<div class="sidebar-item ${currentBmCat===null?'active':''}" data-bmcat="__all">전체</div>`;
+    bmTitles.forEach(t=>{html+=`<div class="sidebar-item ${currentBmCat===t?'active':''}" data-bmcat="${t}">${t}</div>`;});
+    el.innerHTML=html;
+    el.querySelectorAll('.sidebar-item[data-bmcat]').forEach(item=>{
+      item.onclick=()=>{
+        currentBmCat=item.dataset.bmcat==='__all'?null:item.dataset.bmcat;
+        el.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
+        item.classList.add('active');
+        renderCards('bookmarks',null);
+      };
+    });
+  } else {
     html+=`<div class="sidebar-item ${currentSub===null?'active':''}" data-sub="__all">전체</div>`;
     Object.keys(DATA[cat].subs).forEach(s=>{html+=`<div class="sidebar-item ${currentSub===s?'active':''}" data-sub="${s}">${s}</div>`;});
+    el.innerHTML=html;
+    el.querySelectorAll('.sidebar-item[data-sub]').forEach(item=>{
+      item.onclick=()=>selectSub(item.dataset.sub==='__all'?null:item.dataset.sub);
+    });
   }
-  el.innerHTML=html;
-  el.querySelectorAll('.sidebar-item[data-sub]').forEach(item=>{
-    item.onclick=()=>selectSub(item.dataset.sub==='__all'?null:item.dataset.sub);
-  });
 }
 
 function makeCard(c){
@@ -673,19 +690,24 @@ function renderCards(cat,sub){
   }
 
   if(cat==='bookmarks'){
-    const filtered=applyFiltersAndSearch(getAllCards().filter(c=>bookmarks.has(c.name)));
+    const catOf={};
+    Object.values(DATA).forEach(d=>Object.values(d.subs).forEach(arr=>arr.forEach(c=>{catOf[c.name]=d.title;})));
+    let bmCards=getAllCards().filter(c=>bookmarks.has(c.name));
+    if(currentBmCat) bmCards=bmCards.filter(c=>catOf[c.name]===currentBmCat);
+    const filtered=applyFiltersAndSearch(bmCards);
     total=filtered.length;
     if(!filtered.length){
       container.innerHTML=`<div class="empty-state"><div class="es-icon">★</div><h3>즐겨찾기가 없습니다</h3><p>각 카드의 <strong>★</strong> 버튼을 눌러<br>자주 사용하는 서비스를 추가해보세요</p></div>`;
+    } else if(currentBmCat){
+      const g=document.createElement('div');g.className='cards-grid';
+      filtered.forEach(c=>g.appendChild(makeCard(c)));container.appendChild(g);
     } else {
-      const catOf={};
-      Object.values(DATA).forEach(d=>Object.values(d.subs).forEach(arr=>arr.forEach(c=>{catOf[c.name]=d.title;})));
       const groups={}, order=[];
-      filtered.forEach(c=>{const g=catOf[c.name]||'기타';if(!groups[g]){groups[g]=[];order.push(g);}groups[g].push(c);});
+      filtered.forEach(c=>{const gn=catOf[c.name]||'기타';if(!groups[gn]){groups[gn]=[];order.push(gn);}groups[gn].push(c);});
       order.forEach(gName=>{
         const lbl=document.createElement('div');lbl.className='bm-cat-label';lbl.textContent=gName;container.appendChild(lbl);
         const g=document.createElement('div');g.className='cards-grid';
-        groups[gName].forEach(c=>g.appendChild(makeCard(c)));container.appendChild(g);
+        filtered.filter(c=>(catOf[c.name]||'기타')===gName).forEach(c=>g.appendChild(makeCard(c)));container.appendChild(g);
       });
     }
   } else {
@@ -704,7 +726,7 @@ function renderCards(cat,sub){
 }
 
 function selectCat(cat){
-  currentCat=cat; currentSub=null;
+  currentCat=cat; currentSub=null; if(cat==='bookmarks') currentBmCat=null;
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active',el.dataset.cat===cat));
   const bmBtn=document.getElementById('bmNavBtn');
   if(bmBtn) bmBtn.classList.toggle('active',cat==='bookmarks');
